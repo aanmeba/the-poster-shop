@@ -1,0 +1,15 @@
+@use "../../common/theme.scss" as theme;
+
+.container {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+
+  padding: 1rem;
+  position: fixed;
+  color: theme.$white;
+
+  box-sizing: border-box;
+  border-bottom: 1px solid theme.$white-05;
+}
