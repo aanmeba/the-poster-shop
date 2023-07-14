@@ -7,7 +7,7 @@ import Home from "./pages/Home/Home";
 import { getAllProducts } from "./services/firestore-services";
 
 function App() {
-  getAllProducts();
+  // getAllProducts();
   return (
     <div className={styles.wrapper}>
       <Header />
