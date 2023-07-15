@@ -1,38 +1,113 @@
-.casoursel {
+@use "../../common/mixins.scss";
+@use "../../common/theme.scss" as theme;
+
+.caroursel {
+  position: relative;
   overflow: hidden;
   width: 80%;
   margin: 5rem auto;
+
+  @media (max-width: 1300px) {
+    width: 100%;
+  }
 }
 
 .inner {
   white-space: nowrap;
+  transition: 0.4s;
 }
 
 .slide {
   width: 100%;
-  height: 200px;
+  height: 100%;
   box-sizing: border-box;
 
   display: inline-flex;
   justify-content: center;
   align-items: center;
 
-  border: 1px solid black;
-  background-color: lightblue;
-
   &__item {
+    // 🚨 640px - breakpoint
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+
     margin: 0 1rem;
-    background-color: lightpink;
-    width: 100px;
+    background-color: theme.$white;
+
+    width: 15rem;
+    height: 100%;
+    @include mixins.box-shadow;
+
+    @include mixins.mobile() {
+      //🚨 4 items -> 2 items
+    }
+
+    figure {
+      margin: 0;
+      width: 100%;
+      // padding: 2rem;
+
+      img {
+        @include mixins.box-shadow;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__info {
+      height: 8rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      @media (max-width: 768px) {
+        height: 5rem;
+      }
+
+      &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        min-height: 2rem;
+        &__title {
+          margin: 0;
+          // width: 85%;
+          font-family: "EB Garamond", serif;
+          // overflow-wrap: break-word;
+          white-space: normal;
+          font-size: 1.3rem;
+        }
+
+        &__icon_wrapper {
+          position: relative;
+          right: 0;
+          cursor: pointer;
+          z-index: 12;
+          height: 1.5rem;
+        }
+      }
+
+      &__bottom {
+        p {
+          margin: 0;
+          font-family: "Roboto", sans-serif;
+        }
+      }
+    }
+
+    &:hover {
+      @include mixins.bg-color();
+      opacity: 0.9;
+    }
   }
 }
 
 .indicators {
   display: flex;
   justify-content: center;
+
   gap: 1rem;
 
   &__dot {
@@ -41,9 +116,14 @@
     height: 1rem;
     border-radius: 50%;
     border: 0;
+    background-color: theme.$white-00;
 
     &:hover {
-      background-color: gray;
+      @include mixins.bg-color();
+    }
+
+    &__active {
+      @include mixins.bg-color();
     }
   }
 }
@@ -53,19 +133,25 @@
   height: 3rem;
   border-radius: 50%;
   border: none;
-  box-shadow: 2px 1px 10px 1px rgba(0, 0, 0, 0.1);
+  transition: 0.2s;
+  @include mixins.bg-color(theme.$white);
+  @include mixins.box-shadow-dark;
 
-  // position: absolute;
-  top: 50%;
+  position: absolute;
+  top: 40%;
   transform: translateY(-50%);
 
   &__left {
-    left: 6%;
+    left: 3%;
     transform: translate(-50%, -50%);
   }
 
   &__right {
-    right: 6%;
+    right: 3%;
     transform: translate(50%, -50%);
+  }
+
+  &:hover {
+    @include mixins.bg-color(theme.$white-00);
   }
 }
