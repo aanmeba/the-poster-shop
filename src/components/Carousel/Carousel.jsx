@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import styles from "./Carousel.module.scss";
 import CarouselSlider from "./CarouselSlider";
+import { ArrowLeft, ArrowRight } from "../FontAwesomeIcons/FontAwesomeIcons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faChevronLeft,
+//   faChevronRight,
+// } from "@fortawesome/free-solid-svg-icons";
 
 const Carousel = () => {
   const items = [
@@ -9,35 +15,46 @@ const Carousel = () => {
       { title: "one", price: "$10.00" },
       { title: "two", price: "$20.00" },
       { title: "three", price: "$30.00" },
+      { title: "four", price: "$30.00" },
     ],
     [
-      { title: "four", price: "$30.00" },
       { title: "five", price: "$10.00" },
       { title: "six", price: "$20.00" },
-    ],
-    [
       { title: "xxxxx", price: "$30.00" },
       { title: "aaaaa", price: "$10.00" },
-      { title: "bbbbb", price: "$20.00" },
+    ],
+    [
+      {
+        title: "long title test",
+        price: "$20.00",
+      },
+      { title: "cccc", price: "$30.00" },
+      { title: "getting to know", price: "$10.00" },
+      { title: "get personalised ", price: "$15.00" },
     ],
   ];
   const [active, setActive] = useState(0);
 
   const onClick = (e) => {
-    const currentBtn = e.target.id;
+    // event delegation
+    const currentBtn = e.currentTarget.id;
 
-    if (currentBtn === "right") {
+    if (currentBtn === "arrowRight") {
       if (active === items.length - 1) {
         setActive(0);
       } else {
         setActive(active + 1);
       }
-    } else {
+    } else if (currentBtn === "arrowLeft") {
       if (active === 0) {
         setActive(items.length - 1);
       } else {
         setActive(active - 1);
       }
+    } else {
+      const index = currentBtn.includes("buttonDot") && currentBtn.slice(-1);
+
+      setActive(+index);
     }
   };
 
@@ -46,7 +63,7 @@ const Carousel = () => {
   }, [active]);
 
   return (
-    <section className={styles.casoursel}>
+    <section className={styles.caroursel}>
       <div
         className={styles.inner}
         style={{ transform: `translateX(-${active * 100}%)` }}
@@ -59,17 +76,28 @@ const Carousel = () => {
         <button
           onClick={onClick}
           className={`${styles.arrows} ${styles.arrows__left}`}
+          id="arrowLeft"
         >
-          👈
+          <ArrowLeft />
         </button>
-        <button className={styles.indicators__dot}></button>
-        <button className={styles.indicators__dot}></button>
-        <button className={styles.indicators__dot}></button>
+        {items.map((item, i) => {
+          return (
+            <button
+              onClick={onClick}
+              id={`buttonDot${i}`}
+              key={i}
+              className={`${styles.indicators__dot}
+                ${active === i ? styles.indicators__dot__active : ""}`}
+            ></button>
+          );
+        })}
+
         <button
           onClick={onClick}
+          id="arrowRight"
           className={`${styles.arrows} ${styles.arrows__right}`}
         >
-          👉
+          <ArrowRight />
         </button>
       </div>
     </section>
@@ -77,18 +105,3 @@ const Carousel = () => {
 };
 
 export default Carousel;
-
-{
-  /* <div className={styles.slide}>
-          <div className={styles.slide__item}>{items[0].title}</div>
-          <p>{items[0].price}</p>
-        </div>
-        <div className={styles.slide}>
-          <div className={styles.slide__item}>{items[1].title}</div>
-          <p>{items[1].price}</p>
-        </div>
-        <div className={styles.slide}>
-          <div className={styles.slide__item}>{items[2].title}</div>
-          <p>{items[2].price}</p>
-        </div> */
-}
