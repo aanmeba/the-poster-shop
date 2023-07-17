@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { getData } from "../services/dummy-fetch-services";
 import { ProductsContext } from "../context/ProductsContextProvider";
 import ProductsList from "../components/ProductsList/ProductsList";
+import { checkDatabaseStatus } from "../services/firestore-services";
 
 const ProductsDataLoader = () => {
   const { setProducts } = useContext(ProductsContext);
   const [fetchState, setFetchState] = useState("LOADING");
 
   useEffect(() => {
-    getData()
+    checkDatabaseStatus()
       .then((data) => {
         setProducts(data);
         setFetchState("SUCCESS");

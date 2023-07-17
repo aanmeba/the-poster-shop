@@ -4,6 +4,7 @@ import { ProductsContext } from "../../context/ProductsContextProvider";
 
 const ProductsList = () => {
   const { products } = useContext(ProductsContext);
+  console.log(products, "--- in ProductsList");
   return (
     <section className={styles.container}>
       {products.map((p, i) => (
