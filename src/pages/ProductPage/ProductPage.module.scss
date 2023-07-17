@@ -1,0 +1,79 @@
+@use "../../common/theme.scss" as theme;
+@use "../../common/mixins.scss";
+
+.container {
+  display: flex;
+  gap: 2rem;
+  width: 70vw;
+  flex: 1 1 400px;
+  margin: 7rem auto;
+  height: 600px;
+}
+
+.figure {
+  // background-color: theme.$white;
+  @include mixins.bg-image;
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+
+  &__image {
+    width: auto;
+    height: 100%;
+  }
+}
+
+.info {
+  background-color: theme.$white-07;
+  padding: 2rem;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: theme.$black;
+
+  &__title {
+    font-family: theme.$serif;
+    margin: 0;
+  }
+
+  &__copyright {
+    font-size: 0.9rem;
+  }
+
+  &__sizes {
+    border: 1px solid theme.$shadow;
+    // border: none;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-family: theme.$sans-serif;
+    background-color: transparent;
+  }
+
+  hr {
+    width: 100%;
+    border-top: 1px solid theme.$shadow;
+  }
+}
+
+.button {
+  font-size: 0.9rem;
+  font-family: theme.$sans-serif;
+  background-color: theme.$black;
+  color: theme.$white;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0.7rem 1rem;
+  border: 0;
+
+  &__heart {
+    padding: 0.7rem 1rem;
+    border: 0;
+    background-color: theme.$white;
+    color: theme.$black;
+  }
+}
