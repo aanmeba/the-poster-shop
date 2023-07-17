@@ -1,0 +1,9 @@
+@use "../../common/theme.scss" as theme;
+
+.subtitle {
+  width: 70%;
+  font-family: theme.$serif;
+  margin: 3rem auto 2rem;
+  color: theme.$black;
+  font-size: 2rem;
+}
