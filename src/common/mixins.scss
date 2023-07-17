@@ -1,0 +1,21 @@
+@use "./theme.scss" as theme;
+
+// breakpoints
+$sm: 640px;
+
+@mixin mobile {
+  @media screen and (max-width: $sm) {
+    @content;
+  }
+}
+
+@mixin box-shadow {
+  box-shadow: 2px 1px 5px 1px theme.$white-07;
+}
+@mixin box-shadow-dark {
+  box-shadow: 2px 1px 10px 1px theme.$shadow-dark;
+}
+
+@mixin bg-color($color: theme.$shadow) {
+  background-color: $color;
+}

@@ -1,0 +1,22 @@
+@use "../../common/theme.scss" as theme;
+
+.container {
+  width: 100%;
+  height: 300px;
+  background-color: gray;
+  display: flex;
+  margin: 5rem 0;
+}
+
+.card {
+  width: 50%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__link,
+  &__title {
+    color: theme.$white;
+  }
+}
