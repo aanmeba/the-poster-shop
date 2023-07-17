@@ -4,6 +4,7 @@ import CarouselSlider from "./CarouselSlider";
 import { ArrowLeft, ArrowRight } from "../FontAwesomeIcons/FontAwesomeIcons";
 
 const Carousel = () => {
+  // 🚨 replace items with new arrivals collection
   const items = [
     [
       { title: "one", price: "$10.00" },
