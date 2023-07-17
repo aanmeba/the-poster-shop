@@ -1,7 +1,8 @@
 import Carousel from "../../components/Carousel/Carousel";
+import CollectionWrapper from "../../components/Collections/CollectionWrapper";
 import Hero from "../../components/Hero/Hero";
 
-// import ProductsDataLoader from "../../containers/ProductsDataLoader";
+import ProductsDataLoader from "../../containers/ProductsDataLoader";
 import { ProductsContextProvider } from "../../context/ProductsContextProvider";
 
 const Home = () => {
@@ -10,7 +11,8 @@ const Home = () => {
       <Hero />
       <Carousel />
       <ProductsContextProvider>
-        {/* <ProductsDataLoader /> */}
+        <CollectionWrapper />
+        <ProductsDataLoader />
       </ProductsContextProvider>
     </>
   );
