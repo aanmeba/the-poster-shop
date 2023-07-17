@@ -1,6 +1,6 @@
-const getRandomNum = (limit) => Math.floor(Math.random() * limit) + 1;
+export const getRandomNum = (limit) => Math.floor(Math.random() * limit) + 1;
 
-const getRandomTitle = async () => {
+export const getRandomTitle = async () => {
   const baseUrl = `https://random-word-api.herokuapp.com/word`;
   const length = getRandomNum(3);
   const response = await fetch(`${baseUrl}?number=${length}`);
@@ -8,7 +8,7 @@ const getRandomTitle = async () => {
   return data;
 };
 
-const getPrice = () => {
+export const getPrice = () => {
   let rand = 0;
   while (rand < 30) {
     rand = getRandomNum(7) * 10;
@@ -16,7 +16,7 @@ const getPrice = () => {
   return rand;
 };
 
-const capitalise = (strArr) => {
+export const capitalise = (strArr) => {
   return strArr
     .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
     .join(" ");
