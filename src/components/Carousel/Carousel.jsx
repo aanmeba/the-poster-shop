@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
-import ProductCard from "../ProductCard/ProductCard";
 import styles from "./Carousel.module.scss";
 import CarouselSlider from "./CarouselSlider";
 import { ArrowLeft, ArrowRight } from "../FontAwesomeIcons/FontAwesomeIcons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faChevronLeft,
-//   faChevronRight,
-// } from "@fortawesome/free-solid-svg-icons";
 
 const Carousel = () => {
   const items = [
