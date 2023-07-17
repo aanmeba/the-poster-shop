@@ -19,3 +19,7 @@ $sm: 640px;
 @mixin bg-color($color: theme.$shadow) {
   background-color: $color;
 }
+
+@mixin hover($percent: 70%) {
+  filter: brightness($percent);
+}
