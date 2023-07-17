@@ -98,8 +98,7 @@
     }
 
     &:hover {
-      @include mixins.bg-color();
-      opacity: 0.9;
+      @include mixins.hover(90%);
     }
   }
 }
@@ -119,11 +118,11 @@
     background-color: theme.$white-00;
 
     &:hover {
-      @include mixins.bg-color();
+      @include mixins.hover(90%);
     }
 
     &__active {
-      @include mixins.bg-color();
+      @include mixins.hover(90%);
     }
   }
 }
@@ -152,6 +151,6 @@
   }
 
   &:hover {
-    @include mixins.bg-color(theme.$white-00);
+    @include mixins.hover(90%);
   }
 }
