@@ -4,11 +4,26 @@
   display: flex;
   align-items: center;
   font-family: theme.$serif;
-  color: theme.$white;
-  // color: theme.$black;
 
-  &:visited {
-    // color: theme.$black;
+  &__light {
     color: theme.$white;
+    &:visited {
+      color: theme.$white;
+    }
+  }
+
+  &__dark {
+    color: theme.$black;
+    &:visited {
+      color: theme.$black;
+    }
+  }
+
+  &__fontSize {
+    font-size: 3rem;
+  }
+
+  &__capitalize {
+    text-transform: capitalize;
   }
 }

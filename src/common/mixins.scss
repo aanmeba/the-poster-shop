@@ -9,6 +9,17 @@ $sm: 640px;
   }
 }
 
+@mixin cta-button($bg-color: transparent, $color: theme.$black, $border: none) {
+  background-color: $bg-color;
+  color: $color;
+  border: $border;
+  cursor: pointer;
+  border-radius: 0.1rem;
+  font-family: theme.$sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+}
+
 @mixin bg-image {
   background: theme.$white-darker;
   background: linear-gradient(
