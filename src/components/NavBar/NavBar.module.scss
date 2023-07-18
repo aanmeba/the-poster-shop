@@ -1,7 +1,15 @@
+@use "../../common/theme.scss" as theme;
+
 .nav {
   display: flex;
   align-items: center;
   justify-content: flex-end;
 
   gap: 1rem;
+  span {
+    color: theme.$white;
+    &:visited {
+      color: theme.$white;
+    }
+  }
 }

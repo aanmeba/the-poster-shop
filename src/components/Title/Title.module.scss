@@ -4,9 +4,11 @@
   display: flex;
   align-items: center;
   font-family: theme.$serif;
-  color: theme.$black;
+  color: theme.$white;
+  // color: theme.$black;
 
   &:visited {
-    color: theme.$black;
+    // color: theme.$black;
+    color: theme.$white;
   }
 }
