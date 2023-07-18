@@ -3,8 +3,10 @@ import { ProductsContext } from "../context/ProductsContextProvider";
 import { CollectionContext } from "../context/CollectionContextProvider";
 import ProductsList from "../components/ProductsList/ProductsList";
 import { checkDatabaseStatus } from "../services/firestore-services";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CollectionPage from "../pages/CollectionPage/CollectionPage";
+import Home from "../pages/Home/Home";
+import ProductPage from "../pages/ProductPage/ProductPage";
 
 const ProductsDataLoader = () => {
   const { products, setProducts } = useContext(ProductsContext);
@@ -13,6 +15,10 @@ const ProductsDataLoader = () => {
 
   /** check if it's collection */
   const { id } = useParams();
+  const param = id?.includes("-") ? id.replace("-", " ") : id;
+  const navigate = useNavigate();
+  const location = useLocation();
+
   // most popular -> most-popular
   // new arrivals -> select items
 
@@ -32,19 +38,35 @@ const ProductsDataLoader = () => {
 
   useEffect(() => {
     setFetchState("LOADING");
+
     if (id) {
-      // 🚨 is it acceptable practice?
-      // setTimeout(() => {
-      const collectionItems = products.filter((prod) => prod.collection === id);
-      console.log(id, collectionItems, "collectionItems");
+      const collectionItems = products.filter(
+        (prod) => prod.collection === param
+      );
+      console.log(param, collectionItems, "collectionItems");
       setCollection(collectionItems);
       setFetchState("SUCCESS");
-      // }, 2000);
     }
-  }, [id]);
+    if (location.pathname === "/" && products.length > 0) {
+      setFetchState("SUCCESS");
+      navigate("/");
+    }
+  }, [location.pathname, products]);
+
+  // 🚨 do I need id?
+  console.log(id, param, location, fetchState, products.length);
   return (
     <>
-      {fetchState === "SUCCESS" && id ? <CollectionPage /> : <ProductsList />}
+      {fetchState === "SUCCESS" && location.pathname === "/" && <Home />}
+      {fetchState === "SUCCESS" && location.pathname === "/products" && (
+        <ProductsList />
+      )}
+      {fetchState === "SUCCESS" && location.pathname.includes("/product/") && (
+        <ProductPage />
+      )}
+      {fetchState === "SUCCESS" && location.pathname.includes("collection") && (
+        <CollectionPage />
+      )}
     </>
   );
 };

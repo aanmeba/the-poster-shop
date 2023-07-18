@@ -12,7 +12,7 @@ const Home = () => {
       <Subtitle>New Arrivals</Subtitle>
       <Carousel />
       <CollectionWrapper />
-      <ProductsDataLoader />
+      {/* <ProductsDataLoader /> */}
     </>
   );
 };

@@ -1,10 +1,13 @@
 // import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+import Title from "../Title/Title";
 import styles from "./Collection.module.scss";
 
 const CollectionCard = ({ content }) => {
-  const { title, imageUrl } = content;
-  const bgImage = `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${imageUrl})`;
+  const { collection, image } = content;
+  const bgImage = `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${image})`;
+
   return (
     <div className={styles.card}>
       <div
@@ -12,9 +15,15 @@ const CollectionCard = ({ content }) => {
         style={{ backgroundImage: bgImage }}
       ></div>
       <div className={styles.card__text}>
-        <h3 className={styles.card__text__title}>{title}</h3>
+        <Title capitalize>{collection} collection</Title>
+
         <span className={styles.card__text__linkWrapper}>
-          <span className={styles.card__text__link}>Explore</span>
+          <Link
+            to={`/collection/${collection}`}
+            style={{ textDecoration: "none" }}
+          >
+            <span className={styles.card__text__link}>Explore</span>
+          </Link>
         </span>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import styles from "./ProductPage.module.scss";
 import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../../context/ProductsContextProvider";
@@ -6,6 +6,7 @@ import { HeartEmpty } from "../../components/FontAwesomeIcons/FontAwesomeIcons";
 
 const ProductPage = () => {
   const { id } = useParams();
+  // const location = useLocation();
   const { products } = useContext(ProductsContext);
   const [product, setProduct] = useState({});
 
@@ -14,7 +15,7 @@ const ProductPage = () => {
     setProduct(foundItem);
   }, [id]);
 
-  console.log(id, product, products, "-- productpage");
+  console.log(id, product, location, products, "-- productpage");
   return (
     <section className={styles.container}>
       <div className={styles.figure}>

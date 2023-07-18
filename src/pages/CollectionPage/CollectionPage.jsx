@@ -6,13 +6,14 @@ import ProductsList from "../../components/ProductsList/ProductsList";
 const CollectionPage = () => {
   const { id } = useParams();
 
-  console.log("Collection page - ", id);
+  const collectionName = id.includes("-") ? id.replace("-", " ") : id;
+  console.log("Collection page - ", id, collectionName);
   return (
     <section className={styles.container}>
       <Title dark capitalize>
-        {id} collection
+        {collectionName} collection
       </Title>
-      <ProductsList isCollection />
+      <ProductsList isCollection collectionName={collectionName} />
     </section>
   );
 };
