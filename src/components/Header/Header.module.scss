@@ -9,12 +9,12 @@
 
   padding: 0.5rem 2rem;
   position: fixed; // -> once scroll event effects
-  // color: theme.$white;
+  color: theme.$white;
+  // color: theme.$black;
 
   box-sizing: border-box;
   border-bottom: 1px solid theme.$white-07;
 
-  background-color: theme.$ivory;
+  // background-color: theme.$ivory;
   z-index: 5;
-  color: theme.$black;
 }
