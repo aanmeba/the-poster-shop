@@ -1,11 +1,11 @@
 import NavBar from "../NavBar/NavBar";
-import Title from "../Title/Title";
+import TitleLink from "../TitleLink/TitleLink";
 import styles from "./Header.module.scss";
 
 const Header = () => {
   return (
     <header className={styles.container}>
-      <Title />
+      <TitleLink />
       <NavBar />
     </header>
   );

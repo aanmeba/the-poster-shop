@@ -6,34 +6,34 @@ import { ProductsContext } from "../../context/ProductsContextProvider";
 
 const Carousel = () => {
   // 🚨 replace items with new arrivals collection
-  // const items = [
-  //   [
-  //     { title: "one", price: "$10.00" },
-  //     { title: "two", price: "$20.00" },
-  //     { title: "three", price: "$30.00" },
-  //     { title: "four", price: "$30.00" },
-  //   ],
-  //   [
-  //     { title: "five", price: "$10.00" },
-  //     { title: "six", price: "$20.00" },
-  //     { title: "xxxxx", price: "$30.00" },
-  //     { title: "aaaaa", price: "$10.00" },
-  //   ],
-  //   [
-  //     {
-  //       title: "long title test",
-  //       price: "$20.00",
-  //     },
-  //     { title: "cccc", price: "$30.00" },
-  //     { title: "getting to know", price: "$10.00" },
-  //     { title: "get personalised ", price: "$15.00" },
-  //   ],
-  // ];
+  const items = [
+    [
+      { title: "one", price: "$10.00" },
+      { title: "two", price: "$20.00" },
+      { title: "three", price: "$30.00" },
+      { title: "four", price: "$30.00" },
+    ],
+    [
+      { title: "five", price: "$10.00" },
+      { title: "six", price: "$20.00" },
+      { title: "xxxxx", price: "$30.00" },
+      { title: "aaaaa", price: "$10.00" },
+    ],
+    [
+      {
+        title: "long title test",
+        price: "$20.00",
+      },
+      { title: "cccc", price: "$30.00" },
+      { title: "getting to know", price: "$10.00" },
+      { title: "get personalised ", price: "$15.00" },
+    ],
+  ];
 
-  const { products } = useContext(ProductsContext);
-  const items = products.slice(0, 8);
+  // const { products } = useContext(ProductsContext);
+  // const items = products.slice(0, 8);
 
-  console.log(items, "--- items");
+  // console.log(items, "--- items");
   const [active, setActive] = useState(0);
 
   const onClick = (e) => {

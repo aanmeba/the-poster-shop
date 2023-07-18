@@ -1,0 +1,9 @@
+@use "../../common/mixins.scss";
+@use "../../common/theme.scss" as theme;
+
+.button {
+  padding: 0.5rem 2rem;
+  text-transform: uppercase;
+
+  @include mixins.cta-button(transparent, theme.$white, 2px solid theme.$white);
+}

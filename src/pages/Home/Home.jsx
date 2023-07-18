@@ -4,7 +4,6 @@ import Hero from "../../components/Hero/Hero";
 import Subtitle from "../../components/SubTitle/SubTItle";
 
 import ProductsDataLoader from "../../containers/ProductsDataLoader";
-import { ProductsContextProvider } from "../../context/ProductsContextProvider";
 
 const Home = () => {
   return (
@@ -12,10 +11,8 @@ const Home = () => {
       <Hero />
       <Subtitle>New Arrivals</Subtitle>
       <Carousel />
-      {/* <ProductsContextProvider> */}
       <CollectionWrapper />
       <ProductsDataLoader />
-      {/* </ProductsContextProvider> */}
     </>
   );
 };

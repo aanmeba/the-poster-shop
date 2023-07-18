@@ -1,20 +1,20 @@
 import { useContext } from "react";
 import styles from "./ProductsList.module.scss";
 import { ProductsContext } from "../../context/ProductsContextProvider";
-// import ProductPage from "../../pages/ProductPage/ProductPage";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
+import { CollectionContext } from "../../context/CollectionContextProvider";
 
-const ProductsList = () => {
+const ProductsList = ({ isCollection }) => {
   const { products } = useContext(ProductsContext);
+  const { collection } = useContext(CollectionContext);
 
-  const product = products.find((prod) => prod.id === "z8ym2XTZ0ig");
+  const items = isCollection ? collection : products;
 
-  console.log(products, "found", product, "--- in ProductsList");
   return (
     <section className={styles.container}>
-      {products.map((p, i) => (
-        <Link to={p.id} key={i} style={{ textDecoration: "none" }}>
+      {items.map((p, i) => (
+        <Link to={`product/${p.id}`} key={i} style={{ textDecoration: "none" }}>
           <Card item={p} />
         </Link>
       ))}
