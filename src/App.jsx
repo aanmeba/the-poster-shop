@@ -8,6 +8,8 @@ import ProductsDataLoader from "./containers/ProductsDataLoader";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import { ProductsContextProvider } from "./context/ProductsContextProvider";
 import { CollectionContextProvider } from "./context/CollectionContextProvider";
+import ProductsList from "./components/ProductsList/ProductsList";
+import CollectionPage from "./pages/CollectionPage/CollectionPage";
 
 function App() {
   return (
@@ -17,10 +19,42 @@ function App() {
           <BrowserRouter>
             <Header />
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/products" element={<ProductsDataLoader />} />
-              <Route path="/product/:id" element={<ProductPage />} />
-              <Route path="/collection/:id" element={<ProductsDataLoader />} />
+              <Route
+                path="/"
+                element={
+                  <>
+                    <ProductsDataLoader />
+                    {/* <Home /> */}
+                  </>
+                }
+              />
+              <Route
+                path="/products"
+                element={
+                  <>
+                    <ProductsList />
+                    {/* <ProductsDataLoader /> */}
+                  </>
+                }
+              />
+              <Route
+                path="/product/:id"
+                element={
+                  <>
+                    <ProductPage />
+                    {/* <ProductsDataLoader /> */}
+                  </>
+                }
+              />
+              <Route
+                path="/collection/:id"
+                element={
+                  <>
+                    <CollectionPage />
+                    {/* <ProductsDataLoader /> */}
+                  </>
+                }
+              />
             </Routes>
           </BrowserRouter>
         </CollectionContextProvider>

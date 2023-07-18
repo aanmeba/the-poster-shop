@@ -6,10 +6,19 @@
   justify-content: flex-end;
 
   gap: 1rem;
-  span {
-    color: theme.$white;
-    &:visited {
+  &__text {
+    &__light {
       color: theme.$white;
+      &:visited {
+        color: theme.$white;
+      }
+    }
+
+    &__dark {
+      color: theme.$black;
+      &:visited {
+        color: theme.$black;
+      }
     }
   }
 }

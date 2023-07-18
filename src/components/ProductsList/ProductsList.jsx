@@ -14,7 +14,11 @@ const ProductsList = ({ isCollection }) => {
   return (
     <section className={styles.container}>
       {items.map((p, i) => (
-        <Link to={`product/${p.id}`} key={i} style={{ textDecoration: "none" }}>
+        <Link
+          to={`/product/${p.id}`}
+          key={i}
+          style={{ textDecoration: "none" }}
+        >
           <Card item={p} />
         </Link>
       ))}

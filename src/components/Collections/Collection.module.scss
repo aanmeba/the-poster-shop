@@ -28,16 +28,18 @@
     left: 0;
     bottom: 0;
 
-    &__title {
-      font-size: 2rem;
-      font-family: "EB Garamond", serif;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
+    // &__title {
+    //   font-size: 2rem;
+    //   font-family: "EB Garamond", serif;
+    //   font-weight: 600;
+    //   margin-bottom: 1rem;
+    // }
 
     &__linkWrapper {
       position: relative;
       display: inline-block;
+      margin: 1rem 0;
+      cursor: pointer;
 
       &::after {
         content: "";
