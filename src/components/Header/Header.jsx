@@ -2,31 +2,46 @@ import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import TitleLink from "../TitleLink/TitleLink";
 import styles from "./Header.module.scss";
+import { useLocation, useParams } from "react-router-dom";
 
 const Header = () => {
   const defaultStyle = [styles.container];
   const [styleList, setStyleList] = useState(defaultStyle);
   const [colorDark, setColorDark] = useState(false);
 
+  //useLocation or useparam
+  const { id } = useParams();
+  const location = useLocation();
+
+  const transparentMode = () => {
+    setStyleList([...defaultStyle, styles.container__default]);
+    setColorDark(false);
+  };
+
+  const colouredMode = () => {
+    setStyleList([...defaultStyle, styles.container__bg]);
+    setColorDark(true);
+  };
+
   const handleScroll = () => {
-    if (window.scrollY > 3) {
-      setStyleList([...defaultStyle, styles.container__bg]);
-      setColorDark(true);
-    } else {
-      setStyleList([...defaultStyle, styles.container__default]);
-      setColorDark(false);
-    }
+    if (window.scrollY > 5) colouredMode();
+    else transparentMode();
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    if (location.pathname !== "/") colouredMode();
+  }, [location.pathname]);
 
+  useEffect(() => {
+    if (!id && location.pathname === "/") {
+      window.addEventListener("scroll", handleScroll);
+
+      if (window.scrollY < 5) transparentMode();
+    }
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
-  console.log(styleList.join(" "));
+  }, [id, location.pathname]);
 
   return (
     <header className={styleList.join(" ")}>
