@@ -1,21 +1,39 @@
 import { useLocation, useParams } from "react-router-dom";
 import styles from "./ProductPage.module.scss";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ProductsContext } from "../../context/ProductsContextProvider";
+import { GlobalContext } from "../../context/GlobalContextProvider";
 import { HeartEmpty } from "../../components/FontAwesomeIcons/FontAwesomeIcons";
 
-const ProductPage = () => {
+const ProductPage = ({ item }) => {
+  console.log("********* ProductPage *********", item);
+
   const { id } = useParams();
-  // const location = useLocation();
+  const location = useLocation();
   const { products } = useContext(ProductsContext);
+  const { globalState, onClick } = useContext(GlobalContext);
   const [product, setProduct] = useState({});
+  const formRef = useRef();
 
   useEffect(() => {
     const foundItem = products.find((prod) => prod.id === id);
+    // console.log(foundItem, "--found");
     setProduct(foundItem);
-  }, [id]);
+  }, [id, location.pathname, products]);
 
-  console.log(id, product, location, products, "-- productpage");
+  // console.log(id, product, location, "-- productpage");
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const form = formRef.current;
+    const data = new FormData(form);
+    const selectedSize = data.get("sizes");
+
+    const id = e.currentTarget.id || e.nativeEvent.submitter.id;
+    console.log("productPage +++ ", id, product.id, selectedSize);
+    onClick(id, product, selectedSize);
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.figure}>
@@ -31,14 +49,29 @@ const ProductPage = () => {
         <p className={styles.info__price}>${product.price}</p>
         <p className={styles.info__desc}>{product.description}</p>
         <hr />
-        <select className={styles.info__sizes}>
-          <option value="default">select size</option>
-          <option value="small">small</option>
-          <option value="medium">medium</option>
-          <option value="large">large</option>
-        </select>
-        <button className={styles.button}>add to bag</button>
-        <button className={styles.button__heart}>
+        <form ref={formRef} onSubmit={handleClick}>
+          <select name="sizes" className={styles.info__sizes} required>
+            <option value="" selected disabled hidden>
+              select size
+            </option>
+            <option value="small">small</option>
+            <option value="medium">medium</option>
+            <option value="large">large</option>
+          </select>
+          <button
+            // onClick={handleClick}
+            type="submit"
+            id="addToCart"
+            className={styles.button}
+          >
+            add to bag
+          </button>
+        </form>
+        <button
+          className={styles.button__heart}
+          id="addToFav"
+          onClick={handleClick}
+        >
           <HeartEmpty />
         </button>
       </div>

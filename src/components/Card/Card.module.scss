@@ -71,7 +71,7 @@
           position: relative;
           right: 0;
           cursor: pointer;
-          z-index: 12;
+          z-index: 99;
           height: 1.5rem;
         }
       }
@@ -89,3 +89,9 @@
     }
   }
 }
+
+// .heart {
+//   &__filled {
+//     color: red;
+//   }
+// }
