@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const GlobalContext = createContext(null);
 
@@ -6,34 +6,46 @@ export const GlobalContextProvider = ({ children }) => {
   const getItemsFromLocalStorage = (key) =>
     JSON.parse(localStorage.getItem(key));
 
+  /**
+   * I just need ids for localStorage, but it requires more calculation
+   * when getting & setting the items
+   */
   const initialState = {
     favItems: getItemsFromLocalStorage("favItems") || [],
     cartItems: getItemsFromLocalStorage("cartItems") || [],
   };
 
   const [globalState, setGlobalState] = useState(initialState);
+  const [key, setkey] = useState(null);
 
   const saveItemsInLocalStorage = (key) => {
+    console.log("-- local storage setting.. ");
     localStorage.setItem(key, JSON.stringify(globalState[key]));
   };
+
+  useEffect(() => {
+    key && saveItemsInLocalStorage(key);
+  }, [globalState, key]);
 
   const addNewItem = (key, item) => {
     setGlobalState({
       ...globalState,
       [key]: [...globalState[key], item],
     });
-
-    saveItemsInLocalStorage(key);
+    setkey(key);
+    // saveItemsInLocalStorage(key);
   };
 
   const removeItem = (key, item) => {
+    console.log(key, item, "--- removeiTem");
     const filteredItems = globalState[key].filter((el) => el.id !== item.id);
     setGlobalState({
       ...globalState,
       [key]: [...filteredItems],
     });
 
-    saveItemsInLocalStorage(key);
+    setkey(key);
+    // saveItemsInLocalStorage(key);
   };
 
   const isDuplicated = (key, itemId) =>
@@ -43,9 +55,8 @@ export const GlobalContextProvider = ({ children }) => {
     if (globalState[key].length === 0) return addNewItem(key, item);
 
     const duplicatedItem = isDuplicated(key, item.id);
-
     // toggle the favourite item
-    if (duplicatedItem && key === "addToFav") return removeItem(key, item);
+    if (duplicatedItem && key === "favItems") return removeItem(key, item);
     if (duplicatedItem) return;
     if (!duplicatedItem) return addNewItem(key, item);
   };
