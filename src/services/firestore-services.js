@@ -55,7 +55,6 @@ export const setDefaultDatabase = async (collectionRef) => {
 
 export const checkCollectionEmpty = async (collectionRef) => {
   const querySnapshot = await getDocs(collectionRef);
-  console.log(querySnapshot.empty, "--- empty? ");
   return querySnapshot.empty;
 };
 
@@ -64,11 +63,9 @@ export const checkDatabaseStatus = async () => {
 
   try {
     const isEmpty = await checkCollectionEmpty(collectionRef);
-    console.log(isEmpty, "--- isEmpty? ");
     if (isEmpty) {
       return setDefaultDatabase(collectionRef);
     } else {
-      console.log(isEmpty, "--- isEmpty? Nope!");
       return getAllProducts(collectionRef);
     }
   } catch (err) {
