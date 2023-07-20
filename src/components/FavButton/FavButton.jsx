@@ -10,7 +10,7 @@ const FavButton = ({ item, styleList }) => {
   const { favItems } = globalState;
 
   useEffect(() => {
-    console.log(id, "---id in FavButton");
+    // console.log(id, "---id in FavButton");
     favItems.find((el) => el.id === id) && setIsFilled(true);
   }, [id]);
 

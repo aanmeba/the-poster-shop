@@ -26,6 +26,12 @@ const ProductsDataLoader = () => {
       const productId = location.pathname.split("/").pop();
       const foundItem = products.find((prod) => prod.id === productId);
 
+      /*******
+       * 🚨 CHECK how the product page load,
+       * is it use the foundItem, product
+       * how to load products before loading product specific page
+       * is this process used just for handling the fetch state? because productPage has its own product state
+       */
       if (foundItem) {
         setProduct(foundItem);
         setFetchState("SUCCESS");
@@ -72,12 +78,12 @@ const ProductsDataLoader = () => {
       {fetchState === "SUCCESS" && location.pathname === "/products" && (
         <ProductsList />
       )}
-      {fetchState === "SUCCESS" &&
-        location.pathname.includes("/product/") &&
-        product && (
-          <ProductPage item={product} />
-          // <ProductDataLoader />
-        )}
+      {fetchState === "SUCCESS" && location.pathname.includes("/product/") && (
+        // product &&
+        <ProductPage />
+        // <ProductPage item={product} />
+        // <ProductDataLoader />
+      )}
       {fetchState === "SUCCESS" && location.pathname.includes("collection") && (
         <CollectionPage />
       )}
