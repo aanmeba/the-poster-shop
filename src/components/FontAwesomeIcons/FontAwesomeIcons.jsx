@@ -1,4 +1,5 @@
 import {
+  faBagShopping,
   faCartShopping,
   faChevronLeft,
   faChevronRight,
@@ -17,6 +18,10 @@ export const HeartEmpty = () => {
 
 export const ShoppingCart = () => {
   return <FontAwesomeIcon icon={faCartShopping} />;
+};
+
+export const ShoppingBag = () => {
+  return <FontAwesomeIcon icon={faBagShopping} />;
 };
 
 export const ArrowRight = () => {
