@@ -4,10 +4,9 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { ProductsContext } from "../../context/ProductsContextProvider";
 import { GlobalContext } from "../../context/GlobalContextProvider";
 import { HeartEmpty } from "../../components/FontAwesomeIcons/FontAwesomeIcons";
+import FavButton from "../../components/FavButton/FavButton";
 
-const ProductPage = ({ item }) => {
-  console.log("********* ProductPage *********", item);
-
+const ProductPage = () => {
   const { id } = useParams();
   const location = useLocation();
   const { products } = useContext(ProductsContext);
@@ -29,10 +28,14 @@ const ProductPage = ({ item }) => {
     const data = new FormData(form);
     const selectedSize = data.get("sizes");
 
-    const id = e.currentTarget.id || e.nativeEvent.submitter.id;
+    // handle addToCart, addToFav is handled in FavButton
+    const { id } = e.nativeEvent.submitter;
+    // || e.currentTarget.id
     console.log("productPage +++ ", id, product.id, selectedSize);
     onClick(id, product, selectedSize);
   };
+
+  console.log("********* ProductPage *********", product);
 
   return (
     <section className={styles.container}>
@@ -50,8 +53,13 @@ const ProductPage = ({ item }) => {
         <p className={styles.info__desc}>{product.description}</p>
         <hr />
         <form ref={formRef} onSubmit={handleClick}>
-          <select name="sizes" className={styles.info__sizes} required>
-            <option value="" selected disabled hidden>
+          <select
+            name="sizes"
+            defaultValue="default"
+            className={styles.info__sizes}
+            required
+          >
+            <option value="select size" disabled hidden>
               select size
             </option>
             <option value="small">small</option>
@@ -67,13 +75,14 @@ const ProductPage = ({ item }) => {
             add to bag
           </button>
         </form>
-        <button
+        <FavButton item={product} styleList={styles.button__heart} />
+        {/* <button
           className={styles.button__heart}
           id="addToFav"
           onClick={handleClick}
         >
           <HeartEmpty />
-        </button>
+        </button> */}
       </div>
     </section>
   );
