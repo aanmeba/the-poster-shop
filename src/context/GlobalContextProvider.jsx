@@ -3,18 +3,37 @@ import { createContext, useState } from "react";
 export const GlobalContext = createContext(null);
 
 export const GlobalContextProvider = ({ children }) => {
+  const getItemsFromLocalStorage = (key) =>
+    JSON.parse(localStorage.getItem(key));
+
   const initialState = {
-    favItems: [],
-    cartItems: [],
+    favItems: getItemsFromLocalStorage("favItems") || [],
+    cartItems: getItemsFromLocalStorage("cartItems") || [],
   };
 
   const [globalState, setGlobalState] = useState(initialState);
+
+  const saveItemsInLocalStorage = (key) => {
+    localStorage.setItem(key, JSON.stringify(globalState[key]));
+  };
 
   const addNewItem = (key, item) => {
     setGlobalState({
       ...globalState,
       [key]: [...globalState[key], item],
     });
+
+    saveItemsInLocalStorage(key);
+  };
+
+  const removeItem = (key, item) => {
+    const filteredItems = globalState[key].filter((el) => el.id !== item.id);
+    setGlobalState({
+      ...globalState,
+      [key]: [...filteredItems],
+    });
+
+    saveItemsInLocalStorage(key);
   };
 
   const isDuplicated = (key, itemId) =>
@@ -24,12 +43,9 @@ export const GlobalContextProvider = ({ children }) => {
     if (globalState[key].length === 0) return addNewItem(key, item);
 
     const duplicatedItem = isDuplicated(key, item.id);
-    console.log(
-      globalState,
-      duplicatedItem,
-      item,
-      "-- globalState -- check with size"
-    );
+
+    // toggle the favourite item
+    if (duplicatedItem && key === "addToFav") return removeItem(key, item);
     if (duplicatedItem) return;
     if (!duplicatedItem) return addNewItem(key, item);
   };
@@ -38,7 +54,6 @@ export const GlobalContextProvider = ({ children }) => {
     // update size if the product already exists
     if (size) product.size = size;
 
-    console.log(" --- global state ---- ", id, product.id, size, product);
     if (id === "addToFav") {
       console.log("addToFav --");
       checkDuplication("favItems", product);
