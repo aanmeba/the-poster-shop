@@ -4,6 +4,7 @@ import Title from "../../components/Title/Title";
 import ProductsList from "../../components/ProductsList/ProductsList";
 
 const CollectionPage = () => {
+  console.log("********* CollectionPage *********");
   const { id } = useParams();
 
   const collectionName = id.includes("-") ? id.replace("-", " ") : id;

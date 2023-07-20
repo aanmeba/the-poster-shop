@@ -60,7 +60,7 @@ const Carousel = () => {
   };
 
   useEffect(() => {
-    console.log(active);
+    // console.log(active);
   }, [active]);
 
   return (

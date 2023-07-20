@@ -10,11 +10,6 @@ const CollectionWrapper = () => {
     products.find((prod) => prod.collection === c)
   );
 
-  console.log(
-    products.length,
-    products && collectionCardData.length,
-    "-- collection wrapper"
-  );
   return (
     <section className={styles.container}>
       {products.length > 0 &&
