@@ -1,10 +1,19 @@
 @use "../../common/theme.scss" as theme;
+@use "../../common/mixins.scss";
 
 .container {
-  width: 70vw;
+  width: 80vw;
   display: flex;
   flex-direction: column;
   margin: 7rem auto;
 
   align-items: center;
+
+  @include mixins.smaller-than-md {
+    width: 95vw;
+  }
+
+  @include mixins.large {
+    width: 70vw;
+  }
 }

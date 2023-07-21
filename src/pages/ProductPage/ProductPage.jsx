@@ -47,16 +47,23 @@ const ProductPage = () => {
         />
       </div>
       <div className={styles.info}>
-        <h2 className={styles.info__title}>{product.title}</h2>
+        <div className={styles.wrapper}>
+          <h2 className={styles.info__title}>{product.title}</h2>
+          <FavButton item={product} styleList={styles.button__heart} />
+        </div>
         <span className={styles.info__copyright}>by {product.artist}</span>
         <p className={styles.info__price}>${product.price}</p>
         <p className={styles.info__desc}>{product.description}</p>
         <hr />
-        <form ref={formRef} onSubmit={handleClick}>
+        <form
+          ref={formRef}
+          onSubmit={handleClick}
+          className={styles.info__form}
+        >
           <select
             name="sizes"
             defaultValue="default"
-            className={styles.info__sizes}
+            className={styles.info__form__sizes}
             required
           >
             <option value="select size" disabled hidden>
@@ -75,14 +82,7 @@ const ProductPage = () => {
             add to bag
           </button>
         </form>
-        <FavButton item={product} styleList={styles.button__heart} />
-        {/* <button
-          className={styles.button__heart}
-          id="addToFav"
-          onClick={handleClick}
-        >
-          <HeartEmpty />
-        </button> */}
+        {/* <FavButton item={product} styleList={styles.button__heart} /> */}
       </div>
     </section>
   );
