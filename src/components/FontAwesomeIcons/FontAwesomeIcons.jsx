@@ -5,8 +5,16 @@ import {
   faChevronRight,
   faHeart as faHeartSolid,
 } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faHeartEmpty } from "@fortawesome/free-regular-svg-icons";
+import {
+  faHeart as faHeartEmpty,
+  faTrashCan,
+} from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+
+export const Github = () => {
+  return <FontAwesomeIcon icon={faGithub} />;
+};
 
 export const HeartSolid = () => {
   return <FontAwesomeIcon icon={faHeartSolid} />;
@@ -30,4 +38,8 @@ export const ArrowRight = () => {
 
 export const ArrowLeft = () => {
   return <FontAwesomeIcon icon={faChevronLeft} />;
+};
+
+export const Delete = () => {
+  return <FontAwesomeIcon icon={faTrashCan} />;
 };

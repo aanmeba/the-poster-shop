@@ -7,6 +7,7 @@ const Card = ({ item, isCarousel }) => {
     ? styleList.push(styles.card__item_carousel)
     : styleList.push(styles.card__item_basic);
 
+  console.log(isCarousel, "-- card");
   return (
     <article className={styles.card}>
       <div className={styleList.join(" ")}>

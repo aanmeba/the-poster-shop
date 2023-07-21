@@ -7,7 +7,6 @@ import { useLocation, useParams } from "react-router-dom";
 import CollectionPage from "../pages/CollectionPage/CollectionPage";
 import Home from "../pages/Home/Home";
 import ProductPage from "../pages/ProductPage/ProductPage";
-// import ProductDataLoader from "./ProductDataLoader";
 
 const ProductsDataLoader = () => {
   console.log("********* Product s DataLoader *********");
@@ -72,11 +71,15 @@ const ProductsDataLoader = () => {
     }
   }, [location.pathname, products]);
 
+  console.log(fetchState, location.pathname);
   return (
     <>
+      {fetchState === "LOADING" && (
+        <h1 style={{ marginTop: "10rem" }}> Loading ... </h1>
+      )}
       {fetchState === "SUCCESS" && location.pathname === "/" && <Home />}
       {fetchState === "SUCCESS" && location.pathname === "/products" && (
-        <ProductsList />
+        <ProductsList items={products} />
       )}
       {fetchState === "SUCCESS" && location.pathname.includes("/product/") && (
         // product &&

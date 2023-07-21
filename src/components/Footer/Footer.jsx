@@ -1,6 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./Footer.module.scss";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { Github } from "../FontAwesomeIcons/FontAwesomeIcons";
 
 const Footer = () => {
   return (
@@ -10,7 +9,7 @@ const Footer = () => {
         target="_blank"
         rel="noreferrer"
       >
-        <FontAwesomeIcon icon={faGithub} />
+        <Github />
       </a>
       <p>© The Poster Shop by Jungah Ahn 2023</p>
     </footer>

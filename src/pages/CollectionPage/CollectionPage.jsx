@@ -1,21 +1,25 @@
 import { useParams } from "react-router-dom";
-import styles from "./CollectionPage.module.scss";
 import Title from "../../components/Title/Title";
 import ProductsList from "../../components/ProductsList/ProductsList";
+import { useContext } from "react";
+import { CollectionContext } from "../../context/CollectionContextProvider";
+import PageContainer from "../../components/PageContainer/PageContainer";
 
 const CollectionPage = () => {
   console.log("********* CollectionPage *********");
   const { id } = useParams();
 
   const collectionName = id.includes("-") ? id.replace("-", " ") : id;
+
+  const { collection } = useContext(CollectionContext);
   console.log("Collection page - ", id, collectionName);
   return (
-    <section className={styles.container}>
+    <PageContainer>
       <Title dark capitalize>
         {collectionName} collection
       </Title>
-      <ProductsList isCollection collectionName={collectionName} />
-    </section>
+      <ProductsList collectionName={collectionName} items={collection} />
+    </PageContainer>
   );
 };
 
