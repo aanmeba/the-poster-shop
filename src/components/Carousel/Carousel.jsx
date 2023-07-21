@@ -1,47 +1,58 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./Carousel.module.scss";
 import CarouselSlider from "./CarouselSlider";
 import { ArrowLeft, ArrowRight } from "../FontAwesomeIcons/FontAwesomeIcons";
+import { ProductsContext } from "../../context/ProductsContextProvider";
+import { chunkArray, getNumberWithinRange } from "../../helpers/helpers";
 
 const Carousel = () => {
-  const items = [
-    [
-      { title: "one", price: "$10.00" },
-      { title: "two", price: "$20.00" },
-      { title: "three", price: "$30.00" },
-      { title: "four", price: "$30.00" },
-    ],
-    [
-      { title: "five", price: "$10.00" },
-      { title: "six", price: "$20.00" },
-      { title: "xxxxx", price: "$30.00" },
-      { title: "aaaaa", price: "$10.00" },
-    ],
-    [
-      {
-        title: "long title test",
-        price: "$20.00",
-      },
-      { title: "cccc", price: "$30.00" },
-      { title: "getting to know", price: "$10.00" },
-      { title: "get personalised ", price: "$15.00" },
-    ],
-  ];
+  const { products } = useContext(ProductsContext);
+  const [selectedProducts, setSelectedPRoducts] = useState([]);
+  const [numberOfCards, setNumberOfCards] = useState(4);
   const [active, setActive] = useState(0);
+
+  // get random number in the multiples of 4 between 8 to 16
+  const randNum = getNumberWithinRange(8, 4, 4);
+  const selected = products.slice(0, randNum);
+
+  useEffect(() => {
+    const chunked = chunkArray(selected, numberOfCards);
+    console.log(numberOfCards, "--- numberOfCard");
+    setSelectedPRoducts(chunked);
+  }, [numberOfCards]);
+
+  // detect screen size
+  useEffect(() => {
+    const handleResize = () => {
+      console.log(window.innerWidth);
+      if (window.innerWidth < 1000) {
+        setNumberOfCards(2);
+      } else if (window.innerWidth >= 1000) {
+        setNumberOfCards(4);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [window]);
 
   const onClick = (e) => {
     // event delegation
     const currentBtn = e.currentTarget.id;
 
     if (currentBtn === "arrowRight") {
-      if (active === items.length - 1) {
+      if (active === selectedProducts.length - 1) {
         setActive(0);
       } else {
         setActive(active + 1);
       }
     } else if (currentBtn === "arrowLeft") {
       if (active === 0) {
-        setActive(items.length - 1);
+        setActive(selectedProducts.length - 1);
       } else {
         setActive(active - 1);
       }
@@ -53,7 +64,7 @@ const Carousel = () => {
   };
 
   useEffect(() => {
-    console.log(active);
+    // console.log(active);
   }, [active]);
 
   return (
@@ -62,9 +73,10 @@ const Carousel = () => {
         className={styles.inner}
         style={{ transform: `translateX(-${active * 100}%)` }}
       >
-        {items.map((itemArr, i) => (
-          <CarouselSlider key={i} itemArr={itemArr} />
-        ))}
+        {selectedProducts &&
+          selectedProducts.map((itemArr, i) => (
+            <CarouselSlider key={i} itemArr={itemArr} />
+          ))}
       </div>
       <div className={styles.indicators}>
         <button
@@ -74,7 +86,7 @@ const Carousel = () => {
         >
           <ArrowLeft />
         </button>
-        {items.map((item, i) => {
+        {selectedProducts.map((item, i) => {
           return (
             <button
               onClick={onClick}
@@ -99,3 +111,28 @@ const Carousel = () => {
 };
 
 export default Carousel;
+
+// 🚨 replace items with new arrivals collection
+// const items = [
+//   [
+//     { title: "one", price: "$10.00" },
+//     { title: "two", price: "$20.00" },
+//     { title: "three", price: "$30.00" },
+//     { title: "four", price: "$30.00" },
+//   ],
+//   [
+//     { title: "five", price: "$10.00" },
+//     { title: "six", price: "$20.00" },
+//     { title: "xxxxx", price: "$30.00" },
+//     { title: "aaaaa", price: "$10.00" },
+//   ],
+//   [
+//     {
+//       title: "long title test",
+//       price: "$20.00",
+//     },
+//     { title: "cccc", price: "$30.00" },
+//     { title: "getting to know", price: "$10.00" },
+//     { title: "get personalised ", price: "$15.00" },
+//   ],
+// ];

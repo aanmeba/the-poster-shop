@@ -1,5 +1,29 @@
+@use "../../common/theme.scss" as theme;
 .title {
   margin: 0;
   display: flex;
   align-items: center;
+  font-family: theme.$serif;
+
+  &__light {
+    color: theme.$white;
+    &:visited {
+      color: theme.$white;
+    }
+  }
+
+  &__dark {
+    color: theme.$black;
+    &:visited {
+      color: theme.$black;
+    }
+  }
+
+  &__fontSize {
+    font-size: 3rem;
+  }
+
+  &__capitalize {
+    text-transform: capitalize;
+  }
 }

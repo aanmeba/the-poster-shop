@@ -1,12 +1,52 @@
+import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
-import Title from "../Title/Title";
+import TitleLink from "../TitleLink/TitleLink";
 import styles from "./Header.module.scss";
+import { useLocation, useParams } from "react-router-dom";
 
 const Header = () => {
+  const defaultStyle = [styles.container];
+  const [styleList, setStyleList] = useState(defaultStyle);
+  const [colorDark, setColorDark] = useState(false);
+
+  //useLocation or useparam
+  const { id } = useParams();
+  const location = useLocation();
+
+  const transparentMode = () => {
+    setStyleList([...defaultStyle, styles.container__default]);
+    setColorDark(false);
+  };
+
+  const colouredMode = () => {
+    setStyleList([...defaultStyle, styles.container__bg]);
+    setColorDark(true);
+  };
+
+  const handleScroll = () => {
+    if (window.scrollY > 5) colouredMode();
+    else transparentMode();
+  };
+
+  useEffect(() => {
+    if (location.pathname !== "/") colouredMode();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!id && location.pathname === "/") {
+      window.addEventListener("scroll", handleScroll);
+
+      if (window.scrollY < 5) transparentMode();
+    }
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [id, location.pathname]);
+
   return (
-    <header className={styles.container}>
-      <Title />
-      <NavBar />
+    <header className={styleList.join(" ")}>
+      <TitleLink dark={colorDark} />
+      <NavBar dark={colorDark} />
     </header>
   );
 };
