@@ -3,7 +3,6 @@ import {
   HeartEmpty,
   HeartSolid,
   ShoppingBag,
-  ShoppingCart,
 } from "../FontAwesomeIcons/FontAwesomeIcons";
 import styles from "./NavBar.module.scss";
 import { useContext, useEffect, useState } from "react";
@@ -45,15 +44,19 @@ const NavBar = ({ dark }) => {
     console.log(globalState, hasFav, hasCart, "--- navbar");
   }, [globalState]);
 
+  const linkColour = () => ({
+    color: dark ? "rgb(51, 51, 51)" : "rgb(248, 247, 246)",
+  });
+
   return (
     <nav className={styles.nav}>
-      {/* <NavLink to="/products" style={{ textDecoration: "none" }}>
-        <span className={styleList}>Products</span>
-      </NavLink> */}
-      {hasFav ? <HeartSolid /> : <HeartEmpty />}
+      <NavLink to="/favourites" style={linkColour()}>
+        {hasFav ? <HeartSolid /> : <HeartEmpty />}
+      </NavLink>
       {/* {hasItems.favourites ? <HeartSolid /> : <HeartEmpty />} */}
-      {/* <ShoppingCart /> */}
-      <ShoppingBag />
+      <NavLink to="/cart" style={linkColour()}>
+        <ShoppingBag />
+      </NavLink>
     </nav>
   );
 };
