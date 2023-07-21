@@ -8,7 +8,7 @@ const Hero = () => {
     <section className={styles.wrapper}>
       <Title fontSize={3}>Most Popular</Title>
       <Link to={`/collection/most-popular`} style={{ textDecoration: "none" }}>
-        <Button>discover</Button>
+        <Button light>discover</Button>
       </Link>
     </section>
   );

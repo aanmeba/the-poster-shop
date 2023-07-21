@@ -5,6 +5,7 @@ import { ProductsContext } from "../../context/ProductsContextProvider";
 import { GlobalContext } from "../../context/GlobalContextProvider";
 import { HeartEmpty } from "../../components/FontAwesomeIcons/FontAwesomeIcons";
 import FavButton from "../../components/FavButton/FavButton";
+import Button from "../../components/Button/Button";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -73,16 +74,12 @@ const ProductPage = () => {
             <option value="medium">medium</option>
             <option value="large">large</option>
           </select>
-          <button
-            // onClick={handleClick}
-            type="submit"
-            id="addToCart"
-            className={styles.button}
-          >
-            add to bag
-          </button>
+          <div id="addToCart" type="submit" className={styles.button}>
+            <Button dark fill>
+              add to bag
+            </Button>
+          </div>
         </form>
-        {/* <FavButton item={product} styleList={styles.button__heart} /> */}
       </div>
     </section>
   );

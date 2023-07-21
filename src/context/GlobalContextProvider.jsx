@@ -74,6 +74,10 @@ export const GlobalContextProvider = ({ children }) => {
       console.log("addToCart --");
       checkDuplication("cartItems", product);
     }
+
+    if (id === "removeBtn") {
+      removeItem("cartItems", product);
+    }
   };
 
   return (

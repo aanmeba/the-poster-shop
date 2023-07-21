@@ -5,5 +5,23 @@
   padding: 0.5rem 2rem;
   text-transform: uppercase;
 
-  @include mixins.cta-button(transparent, theme.$white, 2px solid theme.$white);
+  &__light {
+    @include mixins.cta-button(
+      transparent,
+      theme.$white,
+      2px solid theme.$white
+    );
+  }
+
+  &__dark {
+    @include mixins.cta-button(
+      theme.$black,
+      theme.$white,
+      2px solid theme.$black
+    );
+  }
+
+  &__fill {
+    width: 100%;
+  }
 }
