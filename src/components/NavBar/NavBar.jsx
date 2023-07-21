@@ -47,9 +47,9 @@ const NavBar = ({ dark }) => {
 
   return (
     <nav className={styles.nav}>
-      <NavLink to="/products" style={{ textDecoration: "none" }}>
+      {/* <NavLink to="/products" style={{ textDecoration: "none" }}>
         <span className={styleList}>Products</span>
-      </NavLink>
+      </NavLink> */}
       {hasFav ? <HeartSolid /> : <HeartEmpty />}
       {/* {hasItems.favourites ? <HeartSolid /> : <HeartEmpty />} */}
       {/* <ShoppingCart /> */}

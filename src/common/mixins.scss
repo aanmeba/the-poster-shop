@@ -16,6 +16,17 @@ $lg: 1200px;
     @content;
   }
 }
+@mixin large {
+  @media screen and (min-width: ($md+1)) {
+    @content;
+  }
+}
+
+@mixin smaller-than-md {
+  @media screen and (max-width: $md) {
+    @content;
+  }
+}
 
 @mixin carousel-width {
   @media (max-width: 1350px) {
