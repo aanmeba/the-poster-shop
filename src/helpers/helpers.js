@@ -8,10 +8,10 @@ export const getRandomWords = async (num) => {
   return data;
 };
 
-export const getNumberWithinRange = (minimum, range) => {
+export const getNumberWithinRange = (minimum, range, unit = 10) => {
   let rand = 0;
   while (rand < minimum) {
-    rand = getRandomNum(range) * 10;
+    rand = getRandomNum(range) * unit;
   }
   return rand;
 };
@@ -53,6 +53,15 @@ export const cleanData = async (data, collection) => {
     sizes: { small: "30x40", medium: "50x70", large: "100x140" },
     collection,
   };
+};
+
+export const chunkArray = (array, size) => {
+  return array.reduce((prev, _, i) => {
+    if (i % size === 0) {
+      prev.push(array.slice(i, i + size));
+    }
+    return prev;
+  }, []);
 };
 
 /**

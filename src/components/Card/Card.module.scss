@@ -2,21 +2,23 @@
 @use "../../common/theme.scss" as theme;
 
 .card {
+  width: 100%;
+
   &__item {
     display: flex;
     flex-direction: column;
-    // align-items: center;
+
+    height: 100%;
     margin: 0 auto;
 
-    // margin: 0 1rem;
     background-color: theme.$white;
-
-    width: 15rem;
-
     // @include mixins.box-shadow;
 
-    @include mixins.mobile() {
-      //🚨 4 items -> 2 items
+    &_basic {
+      width: 15rem;
+    }
+    &_carousel {
+      width: 100%;
     }
 
     figure {
@@ -25,19 +27,8 @@
       height: 20rem;
       padding: 2rem;
       box-sizing: border-box;
-      // background-color: theme.$white-darker;
-      // background-image: linear-gradient(
-      //   rgba(theme.$white-07, 0.7),
-      //   rgba(theme.$white-darker, 0.3)
-      // );
 
       @include mixins.bg-image;
-      // background: theme.$white-darker;
-      // background: linear-gradient(
-      //   300deg,
-      //   rgba(theme.$white-darker, 0.9) 0%,
-      //   rgba(theme.$white-07, 0.1) 80%
-      // );
 
       img {
         // @include mixins.box-shadow;
@@ -89,9 +80,3 @@
     }
   }
 }
-
-// .heart {
-//   &__filled {
-//     color: red;
-//   }
-// }
