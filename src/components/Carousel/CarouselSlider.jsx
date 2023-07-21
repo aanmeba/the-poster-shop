@@ -1,11 +1,18 @@
+import { Link } from "react-router-dom";
+import Card from "../Card/Card";
 import styles from "./Carousel.module.scss";
-import CarouselItem from "./CarouselItem";
 
 const CarouselSlider = ({ itemArr }) => {
   return (
     <div className={styles.slide}>
       {itemArr.map((item, i) => (
-        <CarouselItem key={i} item={item} />
+        <Link
+          to={`/product/${item.id}`}
+          key={i}
+          style={{ textDecoration: "none" }}
+        >
+          <Card key={i} item={item} isCarousel />
+        </Link>
       ))}
     </div>
   );
