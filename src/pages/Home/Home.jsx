@@ -1,19 +1,15 @@
 import Carousel from "../../components/Carousel/Carousel";
 import CollectionWrapper from "../../components/Collections/CollectionWrapper";
 import Hero from "../../components/Hero/Hero";
-
-import ProductsDataLoader from "../../containers/ProductsDataLoader";
-import { ProductsContextProvider } from "../../context/ProductsContextProvider";
+import Subtitle from "../../components/SubTitle/SubTItle";
 
 const Home = () => {
   return (
     <>
       <Hero />
+      <Subtitle>New Arrivals</Subtitle>
       <Carousel />
-      <ProductsContextProvider>
-        <CollectionWrapper />
-        <ProductsDataLoader />
-      </ProductsContextProvider>
+      <CollectionWrapper />
     </>
   );
 };

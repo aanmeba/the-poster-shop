@@ -1,16 +1,23 @@
-import { useContext } from "react";
 import styles from "./ProductsList.module.scss";
-import { ProductsContext } from "../../context/ProductsContextProvider";
+import { Link } from "react-router-dom";
+import Card from "../Card/Card";
 
-const ProductsList = () => {
-  const { products } = useContext(ProductsContext);
-  console.log(products, "--- in ProductsList");
+const ProductsList = ({ items }) => {
+  // const { products } = useContext(ProductsContext);
+  // const { collection } = useContext(CollectionContext);
+
+  // const items = isCollection ? collection : products;
+
   return (
     <section className={styles.container}>
-      {products.map((p, i) => (
-        <div key={i}>
-          <h3>{p.title}</h3>
-        </div>
+      {items.map((p, i) => (
+        <Link
+          to={`/product/${p.id}`}
+          key={i}
+          style={{ textDecoration: "none" }}
+        >
+          <Card item={p} />
+        </Link>
       ))}
     </section>
   );

@@ -1,4 +1,9 @@
-import { capitalise, cleanData, getPrice, getRandomNum } from "./helpers";
+import {
+  capitalise,
+  cleanData,
+  getNumberWithinRange,
+  getRandomNum,
+} from "./helpers";
 
 /* eslint-disable no-undef */
 describe("testing getRandomNum()", () => {
@@ -9,8 +14,8 @@ describe("testing getRandomNum()", () => {
   });
 });
 
-describe("testing getPrice()", () => {
-  const randPrice = getPrice();
+describe("testing getNumberWithinRange()", () => {
+  const randPrice = getNumberWithinRange();
   it("returns price value between 30 and 70", () => {
     expect(randPrice).toBeLessThan(80);
     expect(randPrice).toBeGreaterThan(29);

@@ -1,47 +1,73 @@
 export const getRandomNum = (limit) => Math.floor(Math.random() * limit) + 1;
 
-export const getRandomTitle = async () => {
+export const getRandomWords = async (num) => {
   const baseUrl = `https://random-word-api.herokuapp.com/word`;
-  const length = getRandomNum(3);
+  const length = getRandomNum(num);
   const response = await fetch(`${baseUrl}?number=${length}`);
   const data = await response.json();
   return data;
 };
 
-export const getPrice = () => {
+export const getNumberWithinRange = (minimum, range, unit = 10) => {
   let rand = 0;
-  while (rand < 30) {
-    rand = getRandomNum(7) * 10;
+  while (rand < minimum) {
+    rand = getRandomNum(range) * unit;
   }
   return rand;
 };
 
-export const capitalise = (strArr) => {
-  return strArr
+export const capitalise = (data) => {
+  if (typeof data === "string") {
+    return data.charAt(0).toUpperCase() + data.slice(1);
+  }
+  return data
     .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
     .join(" ");
 };
 
-export const cleanData = async (data) => {
-  const { alt_description, color, id, urls, user } = data;
+export const cleanData = async (data, collection) => {
+  const { alt_description, color, id, urls, user, height, width } = data;
   const image = urls
     ? urls.regular ?? urls.small ?? urls.thumb ?? urls.full ?? urls.raw
     : "";
 
   const name = user ? user.name ?? user.username : "unknown";
-
-  const wordsList = await getRandomTitle();
+  const orientation = height > width ? "portrait" : "landscape";
+  const wordsList = await getRandomWords(2);
   const title = capitalise(wordsList);
+  const additionalDesc = await getRandomWords(50);
+  const description =
+    capitalise(alt_description) + ". " + capitalise(additionalDesc);
 
   return {
     title: title || null,
     id: id || null,
     artist: name || null,
     image: image || null,
-    description: alt_description || null,
-    color: color,
+    description,
+    color,
+    orientation: orientation,
     favourite: false,
-    price: getPrice() || null,
+    price: getNumberWithinRange(30, 7) || null,
+    quantity: getNumberWithinRange(20, 9),
     sizes: { small: "30x40", medium: "50x70", large: "100x140" },
+    collection,
   };
 };
+
+export const chunkArray = (array, size) => {
+  return array.reduce((prev, _, i) => {
+    if (i % size === 0) {
+      prev.push(array.slice(i, i + size));
+    }
+    return prev;
+  }, []);
+};
+
+/**
+ * Due to the strict mode, this app sends requests twice
+ * when setting up the database.
+ * This function is to filter the duplications.
+ * @param {Array} data
+ */
+// export const getUniqueItmes = (data) => {};

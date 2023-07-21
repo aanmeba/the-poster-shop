@@ -1,4 +1,11 @@
+@use "../../common/mixins.scss";
+
 .container {
-  position: relative;
-  display: block;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+
+  gap: 1rem;
+  margin: 5rem auto;
 }

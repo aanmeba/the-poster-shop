@@ -1,17 +1,47 @@
 // import "./App.css";
 import styles from "./App.module.scss";
-
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Home from "./pages/Home/Home";
-import { getAllProducts } from "./services/firestore-services";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProductsDataLoader from "./containers/ProductsDataLoader";
+import ProductPage from "./pages/ProductPage/ProductPage";
+import { ProductsContextProvider } from "./context/ProductsContextProvider";
+import { CollectionContextProvider } from "./context/CollectionContextProvider";
+import { GlobalContextProvider } from "./context/GlobalContextProvider";
+import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
+import GlobalStateLoader from "./containers/GlobalStateLoader";
 
 function App() {
-  // getAllProducts();
   return (
     <div className={styles.wrapper}>
-      <Header />
-      <Home />
+      <ProductsContextProvider>
+        <GlobalContextProvider>
+          <CollectionContextProvider>
+            <BrowserRouter>
+              <Header />
+              <Routes>
+                <Route path="/" element={<ProductsDataLoader />} />
+                <Route path="/products" element={<ProductsDataLoader />} />
+                <Route
+                  path="/product/:id"
+                  element={
+                    <>
+                      {/* <ProductsDataLoader /> */}
+                      <ProductPage />
+                    </>
+                  }
+                />
+                <Route
+                  path="/collection/:id"
+                  element={<ProductsDataLoader />}
+                />
+                <Route path="/favourites" element={<GlobalStateLoader />} />
+                <Route path="/cart" element={<GlobalStateLoader />} />
+              </Routes>
+            </BrowserRouter>
+          </CollectionContextProvider>
+        </GlobalContextProvider>
+      </ProductsContextProvider>
       <Footer />
     </div>
   );
