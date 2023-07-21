@@ -8,6 +8,8 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import { ProductsContextProvider } from "./context/ProductsContextProvider";
 import { CollectionContextProvider } from "./context/CollectionContextProvider";
 import { GlobalContextProvider } from "./context/GlobalContextProvider";
+import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
+import GlobalStateLoader from "./containers/GlobalStateLoader";
 
 function App() {
   return (
@@ -33,10 +35,8 @@ function App() {
                   path="/collection/:id"
                   element={<ProductsDataLoader />}
                 />
-                {/* <Route path="/" element={<ProductsDataLoader />} />
-              <Route path="/products" element={<ProductsList />} />
-              <Route path="/product/:id" element={<ProductPage />} />
-              <Route path="/collection/:id" element={<CollectionPage />} /> */}
+                <Route path="/favourites" element={<GlobalStateLoader />} />
+                <Route path="/cart" element={<GlobalStateLoader />} />
               </Routes>
             </BrowserRouter>
           </CollectionContextProvider>
