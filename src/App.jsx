@@ -8,8 +8,9 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import { ProductsContextProvider } from "./context/ProductsContextProvider";
 import { CollectionContextProvider } from "./context/CollectionContextProvider";
 import { GlobalContextProvider } from "./context/GlobalContextProvider";
-import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
 import GlobalStateLoader from "./containers/GlobalStateLoader";
+import ThanksPage from "./pages/ThanksPage/ThanksPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
                 />
                 <Route path="/favourites" element={<GlobalStateLoader />} />
                 <Route path="/cart" element={<GlobalStateLoader />} />
+                <Route path="/thanks" element={<ThanksPage />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </BrowserRouter>
           </CollectionContextProvider>

@@ -1,5 +1,11 @@
 import { db } from "../../config/firestore-config";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { getImagesByQuery } from "./unsplash-services";
 import { cleanData } from "../helpers/helpers";
 
@@ -50,6 +56,29 @@ export const setDefaultDatabase = async (collectionRef) => {
     }
   } catch (err) {
     throw new Error("Error adding doc: ", err);
+  }
+};
+
+export const updateDocument = async (obj) => {
+  const collectionRef = collection(db, "products");
+
+  try {
+    for (const [key, value] of Object.entries(obj)) {
+      const querySnapshot = await getDocs(collectionRef);
+      const { orderQty } = value;
+
+      querySnapshot.forEach(async (docSnapshot) => {
+        const data = docSnapshot.data();
+        if (data.id === key) {
+          const docRef = doc(collectionRef, docSnapshot.id);
+          const available = data.quantity - orderQty;
+          await updateDoc(docRef, { quantity: available });
+        }
+      });
+    }
+    console.log("Documents updated successfully.");
+  } catch (err) {
+    throw new Error("Error updating document: ", err);
   }
 };
 

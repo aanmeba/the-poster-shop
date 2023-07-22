@@ -1,8 +1,11 @@
 import PageContainer from "../../components/PageContainer/PageContainer";
 import ProductsList from "../../components/ProductsList/ProductsList";
 import Title from "../../components/Title/Title";
+import CTAButton from "../../components/CTAButton/CTAButton";
 
 const FavouritesPage = ({ items }) => {
+  const message = "Your favourite list is currently empty";
+  const cta = "see our favourites";
   return (
     <PageContainer>
       <Title dark capitalize>
@@ -11,7 +14,7 @@ const FavouritesPage = ({ items }) => {
       {items.length > 0 ? (
         <ProductsList items={items} />
       ) : (
-        <h3>Your favourite list is currently empty</h3>
+        <CTAButton message={message} cta={cta} />
       )}
     </PageContainer>
   );

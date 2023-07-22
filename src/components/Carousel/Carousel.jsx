@@ -17,7 +17,6 @@ const Carousel = () => {
 
   useEffect(() => {
     const chunked = chunkArray(selected, numberOfCards);
-    console.log(numberOfCards, "--- numberOfCard");
     setSelectedPRoducts(chunked);
   }, [numberOfCards]);
 
@@ -25,9 +24,13 @@ const Carousel = () => {
   useEffect(() => {
     const handleResize = () => {
       console.log(window.innerWidth);
-      if (window.innerWidth < 1000) {
+      if (window.innerWidth < 590) {
+        setNumberOfCards(1);
+      } else if (window.innerWidth < 830) {
         setNumberOfCards(2);
-      } else if (window.innerWidth >= 1000) {
+      } else if (window.innerWidth < 1120) {
+        setNumberOfCards(3);
+      } else if (window.innerWidth >= 1120) {
         setNumberOfCards(4);
       }
     };
@@ -86,7 +89,7 @@ const Carousel = () => {
         >
           <ArrowLeft />
         </button>
-        {selectedProducts.map((item, i) => {
+        {selectedProducts.map((_, i) => {
           return (
             <button
               onClick={onClick}
@@ -111,28 +114,3 @@ const Carousel = () => {
 };
 
 export default Carousel;
-
-// 🚨 replace items with new arrivals collection
-// const items = [
-//   [
-//     { title: "one", price: "$10.00" },
-//     { title: "two", price: "$20.00" },
-//     { title: "three", price: "$30.00" },
-//     { title: "four", price: "$30.00" },
-//   ],
-//   [
-//     { title: "five", price: "$10.00" },
-//     { title: "six", price: "$20.00" },
-//     { title: "xxxxx", price: "$30.00" },
-//     { title: "aaaaa", price: "$10.00" },
-//   ],
-//   [
-//     {
-//       title: "long title test",
-//       price: "$20.00",
-//     },
-//     { title: "cccc", price: "$30.00" },
-//     { title: "getting to know", price: "$10.00" },
-//     { title: "get personalised ", price: "$15.00" },
-//   ],
-// ];

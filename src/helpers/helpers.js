@@ -64,6 +64,15 @@ export const chunkArray = (array, size) => {
   }, []);
 };
 
+export const checkAvailability = (num) => {
+  return num === 0 ? "Not" : num > 1 ? num + " pieces" : num + " piece";
+};
+
+export const clearLocalStorage = (key) => {
+  localStorage.removeItem(key);
+  console.log(`Item with key "${key}" removed from localStorage.`);
+};
+
 /**
  * Due to the strict mode, this app sends requests twice
  * when setting up the database.
