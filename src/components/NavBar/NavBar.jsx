@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import {
+  EmptyFolder,
   HeartEmpty,
   HeartSolid,
   ShoppingBag,
@@ -55,7 +56,7 @@ const NavBar = ({ dark }) => {
       </NavLink>
       {/* {hasItems.favourites ? <HeartSolid /> : <HeartEmpty />} */}
       <NavLink to="/cart" style={linkColour()}>
-        <ShoppingBag />
+        {hasCart ? <ShoppingBag /> : <EmptyFolder />}
       </NavLink>
     </nav>
   );

@@ -3,15 +3,15 @@ import styles from "./ProductPage.module.scss";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ProductsContext } from "../../context/ProductsContextProvider";
 import { GlobalContext } from "../../context/GlobalContextProvider";
-import { HeartEmpty } from "../../components/FontAwesomeIcons/FontAwesomeIcons";
 import FavButton from "../../components/FavButton/FavButton";
 import Button from "../../components/Button/Button";
+import { checkAvailability } from "../../helpers/helpers";
 
 const ProductPage = () => {
   const { id } = useParams();
   const location = useLocation();
   const { products } = useContext(ProductsContext);
-  const { globalState, onClick } = useContext(GlobalContext);
+  const { onClick } = useContext(GlobalContext);
   const [product, setProduct] = useState({});
   const formRef = useRef();
 
@@ -31,8 +31,6 @@ const ProductPage = () => {
 
     // handle addToCart, addToFav is handled in FavButton
     const { id } = e.nativeEvent.submitter;
-    // || e.currentTarget.id
-    console.log("productPage +++ ", id, product.id, selectedSize);
     onClick(id, product, selectedSize);
   };
 
@@ -55,6 +53,10 @@ const ProductPage = () => {
         <span className={styles.info__copyright}>by {product.artist}</span>
         <p className={styles.info__price}>${product.price}</p>
         <p className={styles.info__desc}>{product.description}</p>
+        <p className={styles.info__desc}>
+          {checkAvailability(product.quantity)} available
+        </p>
+
         <hr />
         <form
           ref={formRef}
@@ -74,8 +76,8 @@ const ProductPage = () => {
             <option value="medium">medium</option>
             <option value="large">large</option>
           </select>
-          <div id="addToCart" type="submit" className={styles.button}>
-            <Button dark fill>
+          <div type="submit" className={styles.button}>
+            <Button dark fill id="addToCart">
               add to bag
             </Button>
           </div>

@@ -24,83 +24,6 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-
-  &__item {
-    // 🚨 640px - breakpoint
-    display: flex;
-    flex-direction: column;
-
-    // margin: 0 1rem;
-    background-color: theme.$white;
-
-    min-width: 15rem; // ⭐️
-    height: 100%; // ⭐️
-    @include mixins.box-shadow;
-
-    @include mixins.mobile() {
-      //🚨 4 items -> 2 items
-    }
-
-    figure {
-      margin: 0;
-      width: 100%;
-      // padding: 2rem;
-
-      img {
-        @include mixins.box-shadow;
-        // width: 100%;
-        // height: 100%;
-        // object-fit: cover;
-      }
-    }
-
-    &__info {
-      // height: 8rem;
-      // padding: 1rem;
-      // display: flex;
-      // flex-direction: column;
-      // justify-content: space-between;
-
-      @media (max-width: 768px) {
-        height: 5rem;
-      }
-
-      // &__top {
-      //   display: flex;
-      //   justify-content: space-between;
-      //   align-items: flex-start;
-      //   min-height: 2rem;
-      //   &__title {
-      //     margin: 0;
-      //     // width: 85%;
-      //     font-family: "EB Garamond", serif;
-      //     // overflow-wrap: break-word;
-      //     white-space: normal;
-      //     font-size: 1.3rem;
-      //   }
-
-      //   &__icon_wrapper {
-      //     position: relative;
-      //     right: 0;
-      //     cursor: pointer;
-      //     z-index: 12;
-      //     height: 1.5rem;
-      //   }
-      // }
-
-      //   &__bottom {
-      //     p {
-      //       margin: 0;
-      //       font-family: "Roboto", sans-serif;
-      //     }
-      //   }
-      // }
-
-      // &:hover {
-      //   @include mixins.hover(90%);
-      // }
-    }
-  }
 }
 
 .indicators {
@@ -125,6 +48,12 @@
     &__active {
       @include mixins.hover(90%);
     }
+  }
+  @include mixins.carousel-small {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 70%;
+    margin: 2rem auto;
   }
 }
 
@@ -154,5 +83,9 @@
 
   &:hover {
     @include mixins.hover(90%);
+  }
+
+  @include mixins.carousel-small {
+    display: none;
   }
 }

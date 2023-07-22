@@ -8,6 +8,8 @@
   margin: 7rem auto;
 
   align-items: center;
+  height: 80vh;
+  flex: 1;
 
   @include mixins.smaller-than-md {
     width: 95vw;
