@@ -1,47 +1,73 @@
-import Button from "../../components/Button/Button";
+import { useState, useEffect } from "react";
 import CartCard from "../../components/CartCard/CartCard";
+import CartTotal from "../../components/CartTotal/CartTotal";
 import PageContainer from "../../components/PageContainer/PageContainer";
-import styles from "./CartPage.module.scss";
+import Title from "../../components/Title/Title";
+import { updateDocument } from "../../services/firestore-services";
+import { clearLocalStorage } from "../../helpers/helpers";
+import { useNavigate } from "react-router-dom";
+import CTAButton from "../../components/CTAButton/CTAButton";
 
 const CartPage = ({ items }) => {
-  const totalPrice = items.reduce((prev, curr) => prev + curr.price, 0);
+  const initialOrder = {};
+  items.forEach((item) => {
+    initialOrder[item.id] = {
+      orderQty: 1,
+      price: item.price,
+      subTotal: 1 * item.price,
+    };
+  });
+  const [order, setOrder] = useState(initialOrder);
+  const [total, setTotal] = useState(0);
+  const calculateTotal = (id, qty) => {
+    setOrder((prev) => {
+      const found = prev[id];
+      found.orderQty = qty;
+      found.subTotal = qty * found.price;
+      return { ...prev, [id]: found };
+    });
+  };
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const sumTotal = Object.values(order).reduce(
+      (prev, curr) => prev + curr.subTotal,
+      0
+    );
+    console.log(Object.values(order), sumTotal);
+    setTotal(sumTotal);
+  }, [order]);
+
+  const handlePayment = () => {
+    // deduct the qty from quantity
+    console.log("payment btn clicked!");
+    updateDocument(order)
+      .then(() => clearLocalStorage("cartItems"))
+      .catch((err) => console.log("something went wrong...", err))
+      .finally(() => navigate("/thanks"));
+  };
+
+  console.log(order, " --- order");
+  const message = "Your shopping bag is empty";
+  const cta = "explore best sellers";
 
   return (
     <PageContainer>
+      <Title dark capitalize>
+        Shopping Bag
+      </Title>
       {items?.length > 0 ? (
-        items.map((item, i) => <CartCard key={i} item={item} />)
+        items.map((item, i) => (
+          <CartCard key={i} item={item} calculateTotal={calculateTotal} />
+        ))
       ) : (
-        <h1>Your shopping bag is empty</h1>
+        <CTAButton message={message} cta={cta} />
       )}
-      <div>
-        <h1>total: {totalPrice} </h1>
-      </div>
-      <div>
-        <Button dark>Pay Now</Button>
-      </div>
+      {items?.length > 0 && (
+        <CartTotal total={total} handlePayment={handlePayment} />
+      )}
     </PageContainer>
   );
 };
 
 export default CartPage;
-
-{
-  /* <PageContainer>
-<table className={styles.table}>
-  <thead>
-    <tr>
-      <th>product</th>
-      <th>details</th>
-      <th>price</th>
-    </tr>
-  </thead>
-  <tbody className={styles.table__body}>
-    {items?.length > 0 ? (
-      items.map((item, i) => <CartCard key={i} item={item} />)
-    ) : (
-      <h1>Your shopping bag is empty</h1>
-    )}
-  </tbody>
-</table>
-</PageContainer> */
-}
