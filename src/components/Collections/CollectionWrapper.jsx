@@ -5,7 +5,7 @@ import { ProductsContext } from "../../context/ProductsContextProvider";
 
 const CollectionWrapper = () => {
   const { products } = useContext(ProductsContext);
-  const featuredCollections = ["urban", "aurora"];
+  const featuredCollections = ["urban", "aurora", "nature"];
   const collectionCardData = featuredCollections.map((c) =>
     products.find((prod) => prod.collection === c)
   );

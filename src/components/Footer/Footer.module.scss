@@ -10,6 +10,9 @@
   align-items: center;
   color: theme.$light-gray;
 
+  margin-top: auto;
+  flex-shrink: 0;
+
   a:visited {
     color: theme.$light-gray;
   }
