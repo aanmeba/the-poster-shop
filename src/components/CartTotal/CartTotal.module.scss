@@ -1,0 +1,23 @@
+@use "../../common/theme.scss" as theme;
+
+hr {
+  width: 100%;
+  border-top: 1px solid theme.$shadow;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  &__inner {
+    text-transform: uppercase;
+    width: 30%;
+  }
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  color: theme.$dark-gray;
+}
