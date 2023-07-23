@@ -1,9 +1,10 @@
 import styles from "./Title.module.scss";
 
-const Title = ({ children, fontSize, capitalize, dark }) => {
+const Title = ({ children, fontSize, capitalize, dark, gray }) => {
   const styleList = [styles.title];
-  if (!dark) styleList.push(styles.title__light);
-  else styleList.push(styles.title__dark);
+  if (dark) styleList.push(styles.title__dark);
+  else if (gray) styleList.push(styles.title__gray);
+  else styleList.push(styles.title__light);
 
   if (fontSize) styleList.push(styles.title__fontSize);
   if (capitalize) styleList.push(styles.title__capitalize);

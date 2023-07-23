@@ -1,6 +1,6 @@
 import {
   capitalise,
-  cleanData,
+  // cleanData,
   getNumberWithinRange,
   getRandomNum,
 } from "./helpers";

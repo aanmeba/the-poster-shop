@@ -1,15 +1,10 @@
 import styles from "./Card.module.scss";
 import FavButton from "../FavButton/FavButton";
 
-const Card = ({ item, isCarousel }) => {
-  const styleList = [styles.card__item];
-  isCarousel
-    ? styleList.push(styles.card__item_carousel)
-    : styleList.push(styles.card__item_basic);
-
+const Card = ({ item }) => {
   return (
     <article className={styles.card}>
-      <div className={styleList.join(" ")}>
+      <div className={styles.card__item}>
         <figure>
           <img src={item.image} alt={item.title} />
         </figure>

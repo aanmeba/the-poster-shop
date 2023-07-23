@@ -1,41 +1,24 @@
 @use "./theme.scss" as theme;
 
 // breakpoints
-$xs: 590px;
-$sm: 640px;
+$sm: 590px;
 $md: 800px;
-$mm: 830px;
+$md2: 830px;
 $lg: 1200px;
-
-// @mixin xs-screen {
-//   @media screen and (max-width: $xs) {
-//     @content;
-//   }
-// }
+$xl: 1350px;
 
 @mixin carousel-small {
-  @media screen and (max-width: $mm) {
+  @media screen and (max-width: $md2) {
     @content;
   }
 }
 
 @mixin smaller-screen {
-  @media screen and (max-width: $xs) {
-    @content;
-  }
-}
-
-@mixin mobile {
   @media screen and (max-width: $sm) {
     @content;
   }
 }
 
-@mixin medium {
-  @media screen and (min-width: ($sm + 1)) and (max-width: $md) {
-    @content;
-  }
-}
 @mixin large {
   @media screen and (min-width: ($md+1)) {
     @content;
@@ -49,7 +32,7 @@ $lg: 1200px;
 }
 
 @mixin carousel-width {
-  @media screen and (max-width: 1350px) {
+  @media screen and (max-width: $xl) {
     width: 90%;
   }
 }
@@ -91,4 +74,40 @@ $lg: 1200px;
 
 @mixin margin-for-container {
   margin: 5rem auto;
+}
+
+@mixin flex-center-center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin card-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: theme.$black;
+}
+
+@mixin card-title($font) {
+  margin: 0;
+  font-family: $font;
+  white-space: normal;
+  font-size: 1rem;
+}
+
+@mixin btn-circle {
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 50%;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+@mixin hr {
+  width: 100%;
+  border-top: 1px solid theme.$shadow;
 }

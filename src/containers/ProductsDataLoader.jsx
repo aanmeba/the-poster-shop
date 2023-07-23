@@ -7,9 +7,9 @@ import { useLocation, useParams } from "react-router-dom";
 import CollectionPage from "../pages/CollectionPage/CollectionPage";
 import Home from "../pages/Home/Home";
 import ProductPage from "../pages/ProductPage/ProductPage";
+import LoadingShimmer from "../components/LoadingShimmer/LoadingShimmer";
 
 const ProductsDataLoader = () => {
-  console.log("********* Product s DataLoader *********");
   const { products, setProducts } = useContext(ProductsContext);
   const { setCollection } = useContext(CollectionContext);
   const [fetchState, setFetchState] = useState("LOADING");
@@ -18,27 +18,7 @@ const ProductsDataLoader = () => {
   /** check if it's collection */
   const { id } = useParams();
   const param = id?.includes("-") ? id.replace("-", " ") : id;
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.pathname.includes("/product/") && products.length > 0) {
-      const productId = location.pathname.split("/").pop();
-      const foundItem = products.find((prod) => prod.id === productId);
-
-      /*******
-       * 🚨 CHECK how the product page load,
-       * is it use the foundItem, product
-       * how to load products before loading product specific page
-       * is this process used just for handling the fetch state? because productPage has its own product state
-       */
-      if (foundItem) {
-        setProduct(foundItem);
-        setFetchState("SUCCESS");
-      } else {
-        setFetchState("ERROR");
-      }
-    }
-  }, [location.pathname]);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     setFetchState("LOADING");
@@ -56,9 +36,7 @@ const ProductsDataLoader = () => {
   useEffect(() => {
     setFetchState("LOADING");
 
-    if (location.pathname.includes("collection")) {
-      // 🚨 might be used instead of param
-      // const collectionName = location.pathname.split("/").pop();
+    if (pathname.includes("collection")) {
       const collectionItems = products.filter(
         (prod) => prod.collection === param
       );
@@ -66,28 +44,38 @@ const ProductsDataLoader = () => {
       setFetchState("SUCCESS");
     }
 
-    if (location.pathname === "/" && products.length > 0) {
+    if (pathname === "/" && products.length > 0) {
       setFetchState("SUCCESS");
     }
-  }, [location.pathname, products]);
+  }, [pathname, products]);
 
-  console.log(fetchState, location.pathname);
+  useEffect(() => {
+    setFetchState("LOADING");
+
+    if (pathname.includes("/product/") && products.length > 0) {
+      const productId = pathname.split("/").pop();
+      const foundItem = products.find((prod) => prod.id === productId);
+
+      if (foundItem) {
+        setProduct(foundItem);
+        setFetchState("SUCCESS");
+      } else {
+        setFetchState("ERROR");
+      }
+    }
+  }, [fetchState]);
+
   return (
     <>
-      {fetchState === "LOADING" && (
-        <h1 style={{ marginTop: "10rem" }}> Loading ... </h1>
-      )}
-      {fetchState === "SUCCESS" && location.pathname === "/" && <Home />}
-      {fetchState === "SUCCESS" && location.pathname === "/products" && (
+      {fetchState === "LOADING" && <LoadingShimmer />}
+      {fetchState === "SUCCESS" && pathname === "/" && <Home />}
+      {fetchState === "SUCCESS" && pathname === "/products" && (
         <ProductsList items={products} />
       )}
-      {fetchState === "SUCCESS" && location.pathname.includes("/product/") && (
-        // product &&
-        <ProductPage />
-        // <ProductPage item={product} />
-        // <ProductDataLoader />
-      )}
-      {fetchState === "SUCCESS" && location.pathname.includes("collection") && (
+      {fetchState === "SUCCESS" &&
+        pathname.includes("/product/") &&
+        product && <ProductPage product={product} />}
+      {fetchState === "SUCCESS" && pathname.includes("collection") && (
         <CollectionPage />
       )}
     </>

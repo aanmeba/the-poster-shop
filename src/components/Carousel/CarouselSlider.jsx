@@ -11,7 +11,7 @@ const CarouselSlider = ({ itemArr }) => {
           key={i}
           style={{ textDecoration: "none" }}
         >
-          <Card key={i} item={item} isCarousel />
+          <Card key={i} item={item} />
         </Link>
       ))}
     </div>
