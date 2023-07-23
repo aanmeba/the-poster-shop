@@ -19,6 +19,7 @@ const CartPage = ({ items }) => {
   });
   const [order, setOrder] = useState(initialOrder);
   const [total, setTotal] = useState(0);
+
   const calculateTotal = (id, qty) => {
     setOrder((prev) => {
       const found = prev[id];
@@ -34,20 +35,18 @@ const CartPage = ({ items }) => {
       (prev, curr) => prev + curr.subTotal,
       0
     );
-    console.log(Object.values(order), sumTotal);
     setTotal(sumTotal);
   }, [order]);
 
   const handlePayment = () => {
     // deduct the qty from quantity
-    console.log("payment btn clicked!");
+
     updateDocument(order)
       .then(() => clearLocalStorage("cartItems"))
       .catch((err) => console.log("something went wrong...", err))
       .finally(() => navigate("/thanks"));
   };
 
-  console.log(order, " --- order");
   const message = "Your shopping bag is empty";
   const cta = "explore best sellers";
 

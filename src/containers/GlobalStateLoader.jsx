@@ -11,7 +11,6 @@ const GlobalStateLoader = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    console.log(pathname, fetchState, favItems, cartItems);
     if (globalState) {
       setFetchState("SUCCESS");
     }

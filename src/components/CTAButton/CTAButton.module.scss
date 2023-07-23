@@ -2,8 +2,5 @@
 
 .container {
   @include mixins.margin-for-container;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include mixins.flex-center-center(column);
 }

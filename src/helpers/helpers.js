@@ -72,11 +72,3 @@ export const clearLocalStorage = (key) => {
   localStorage.removeItem(key);
   console.log(`Item with key "${key}" removed from localStorage.`);
 };
-
-/**
- * Due to the strict mode, this app sends requests twice
- * when setting up the database.
- * This function is to filter the duplications.
- * @param {Array} data
- */
-// export const getUniqueItmes = (data) => {};

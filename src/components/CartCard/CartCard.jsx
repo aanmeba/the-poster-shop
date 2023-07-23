@@ -23,33 +23,37 @@ const CartCard = ({ item, calculateTotal }) => {
 
   return (
     <article className={styles.row}>
-      <div className={styles.row__wrapper}>
-        <button
-          id="removeBtn"
-          className={styles.row__wrapper__delete}
-          onClick={handleDelete}
-        >
-          <Delete />
-        </button>
-      </div>
-      <figure className={styles.row__prod}>
-        <img src={image} alt={title} />
-      </figure>
-      <div className={styles.row__info}>
-        <div className={styles.row__info__top}>
-          <p className={styles.row__info__top__title}>{title}</p>
-          <p>{artist}</p>
+      <div className={styles.row__left}>
+        <div className={styles.row__left__wrapper}>
+          <button
+            id="removeBtn"
+            className={styles.row__left__wrapper__delete}
+            onClick={handleDelete}
+          >
+            <Delete />
+          </button>
         </div>
-        <div className={styles.row__info__bottom}>
-          <p>{sizes[size]}</p>
-          <p>${price}</p>
+        <figure className={styles.row__left__prod}>
+          <img src={image} alt={title} />
+        </figure>
+        <div className={styles.row__left__info}>
+          <div className={styles.row__left__info__top}>
+            <p className={styles.row__left__info__top__title}>{title}</p>
+            <p>{artist}</p>
+          </div>
+          <div className={styles.row__left__info__bottom}>
+            <p>{sizes[size]}</p>
+            <p>${price}</p>
+          </div>
         </div>
       </div>
-      <div className={styles.row__quantity}>
-        <input type="number" value={qty} onChange={handleChange} />
-      </div>
-      <div className={styles.row__sub_total}>
-        <p>${price * qty}</p>
+      <div className={styles.row__right}>
+        <div className={styles.row__right__quantity}>
+          <input type="number" value={qty} onChange={handleChange} />
+        </div>
+        <div className={styles.row__right__sub_total}>
+          <p>${price * qty}</p>
+        </div>
       </div>
     </article>
   );
