@@ -2,7 +2,7 @@
 
 The Poster Shop is a fully functional e-commerce website that specializes in selling posters. It offers a wide range of beautifully designed posters that cater to various interests and styles. The website provides a seamless shopping experience, allowing users to browse, search, and add items to their cart or favorites list. With its intuitive user interface and efficient data management, The Poster Shop ensures a smooth and delightful shopping journey for its customers.
 
-### Visit the live website: [The Poster Shop](https://thepostershop.netlify.app/)
+### 👉 Visit the live website: [The Poster Shop](https://thepostershop.netlify.app/)
 
 ## Features
 
