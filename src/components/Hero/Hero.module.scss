@@ -1,5 +1,6 @@
+@use "../../common/mixins.scss";
+
 .wrapper {
-  // margin-top: 3.2rem;
   gap: 3rem;
   height: 45rem;
 
@@ -10,9 +11,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  // position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+  @include mixins.flex-center-center(column);
 }

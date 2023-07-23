@@ -58,11 +58,7 @@
 }
 
 .arrows {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  border: none;
-  transition: 0.2s;
+  @include mixins.btn-circle;
   @include mixins.bg-color(theme.$white);
   @include mixins.box-shadow-dark;
 
@@ -72,7 +68,6 @@
 
   &__left {
     left: 3%;
-    z-index: 10;
     transform: translate(-50%, -50%);
   }
 

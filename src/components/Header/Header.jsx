@@ -11,7 +11,7 @@ const Header = () => {
 
   //useLocation or useparam
   const { id } = useParams();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   const transparentMode = () => {
     setStyleList([...defaultStyle, styles.container__default]);
@@ -29,11 +29,11 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (location.pathname !== "/") colouredMode();
-  }, [location.pathname]);
+    if (pathname !== "/") colouredMode();
+  }, [pathname]);
 
   useEffect(() => {
-    if (!id && location.pathname === "/") {
+    if (!id && pathname === "/") {
       window.addEventListener("scroll", handleScroll);
 
       if (window.scrollY < 5) transparentMode();
@@ -41,7 +41,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [id, location.pathname]);
+  }, [id, pathname]);
 
   return (
     <header className={styleList.join(" ")}>

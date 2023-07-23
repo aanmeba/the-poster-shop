@@ -12,6 +12,10 @@
     }
   }
 
+  &__gray {
+    color: theme.$shadow;
+  }
+
   &__dark {
     color: theme.$black;
     &:visited {
