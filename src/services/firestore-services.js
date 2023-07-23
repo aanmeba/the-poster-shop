@@ -15,17 +15,6 @@ export const getAllProducts = async (collectionRef) => {
   return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 };
 
-// export const getSummaryData = async (featuredCollection) => {
-//   const collectionRef = collection(db, "products");
-
-//   const querySnapshot = await getDocs(collectionRef);
-
-//   featuredCollection.map((c) => )
-//   querySnapshot.docs.map((doc) => {
-//     console.log({ id: doc.id, ...doc.data() });
-//   });
-// };
-
 export const getCollections = async (collection) => {
   try {
     const data = await getImagesByQuery("photos", collection);

@@ -7,7 +7,7 @@ const CollectionWrapper = () => {
   const { products } = useContext(ProductsContext);
   const featuredCollections = ["urban", "aurora", "nature"];
   const collectionCardData = featuredCollections.map((c) =>
-    products.find((prod) => prod.collection === c)
+    products?.find((prod) => prod.collection === c)
   );
 
   return (

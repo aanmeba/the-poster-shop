@@ -1,27 +1,13 @@
-import { useLocation, useParams } from "react-router-dom";
 import styles from "./ProductPage.module.scss";
-import { useContext, useEffect, useRef, useState } from "react";
-import { ProductsContext } from "../../context/ProductsContextProvider";
+import { useContext, useRef } from "react";
 import { GlobalContext } from "../../context/GlobalContextProvider";
 import FavButton from "../../components/FavButton/FavButton";
 import Button from "../../components/Button/Button";
 import { checkAvailability } from "../../helpers/helpers";
 
-const ProductPage = () => {
-  const { id } = useParams();
-  const location = useLocation();
-  const { products } = useContext(ProductsContext);
+const ProductPage = ({ product }) => {
   const { onClick } = useContext(GlobalContext);
-  const [product, setProduct] = useState({});
   const formRef = useRef();
-
-  useEffect(() => {
-    const foundItem = products.find((prod) => prod.id === id);
-    // console.log(foundItem, "--found");
-    setProduct(foundItem);
-  }, [id, location.pathname, products]);
-
-  // console.log(id, product, location, "-- productpage");
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -34,8 +20,6 @@ const ProductPage = () => {
     onClick(id, product, selectedSize);
   };
 
-  console.log("********* ProductPage *********", product);
-
   return (
     <section className={styles.container}>
       <div className={styles.figure}>
@@ -45,6 +29,7 @@ const ProductPage = () => {
           alt={product.title}
         />
       </div>
+
       <div className={styles.info}>
         <div className={styles.wrapper}>
           <h2 className={styles.info__title}>{product.title}</h2>

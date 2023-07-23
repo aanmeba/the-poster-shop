@@ -13,7 +13,7 @@ const Carousel = () => {
 
   // get random number in the multiples of 4 between 8 to 16
   const randNum = getNumberWithinRange(8, 4, 4);
-  const selected = products.slice(0, randNum);
+  const selected = products?.slice(0, randNum);
 
   useEffect(() => {
     const chunked = chunkArray(selected, numberOfCards);
@@ -23,7 +23,6 @@ const Carousel = () => {
   // detect screen size
   useEffect(() => {
     const handleResize = () => {
-      console.log(window.innerWidth);
       if (window.innerWidth < 590) {
         setNumberOfCards(1);
       } else if (window.innerWidth < 830) {
