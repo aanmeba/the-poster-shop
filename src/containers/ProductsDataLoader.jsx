@@ -7,6 +7,7 @@ import { useLocation, useParams } from "react-router-dom";
 import CollectionPage from "../pages/CollectionPage/CollectionPage";
 import Home from "../pages/Home/Home";
 import ProductPage from "../pages/ProductPage/ProductPage";
+import LoadingShimmer from "../components/LoadingShimmer/LoadingShimmer";
 
 const ProductsDataLoader = () => {
   console.log("********* Product s DataLoader *********");
@@ -18,11 +19,11 @@ const ProductsDataLoader = () => {
   /** check if it's collection */
   const { id } = useParams();
   const param = id?.includes("-") ? id.replace("-", " ") : id;
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    if (location.pathname.includes("/product/") && products.length > 0) {
-      const productId = location.pathname.split("/").pop();
+    if (pathname.includes("/product/") && products.length > 0) {
+      const productId = pathname.split("/").pop();
       const foundItem = products.find((prod) => prod.id === productId);
 
       /*******
@@ -38,7 +39,7 @@ const ProductsDataLoader = () => {
         setFetchState("ERROR");
       }
     }
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     setFetchState("LOADING");
@@ -56,9 +57,9 @@ const ProductsDataLoader = () => {
   useEffect(() => {
     setFetchState("LOADING");
 
-    if (location.pathname.includes("collection")) {
+    if (pathname.includes("collection")) {
       // 🚨 might be used instead of param
-      // const collectionName = location.pathname.split("/").pop();
+      // const collectionName = pathname.split("/").pop();
       const collectionItems = products.filter(
         (prod) => prod.collection === param
       );
@@ -66,28 +67,26 @@ const ProductsDataLoader = () => {
       setFetchState("SUCCESS");
     }
 
-    if (location.pathname === "/" && products.length > 0) {
+    if (pathname === "/" && products.length > 0) {
       setFetchState("SUCCESS");
     }
-  }, [location.pathname, products]);
+  }, [pathname, products]);
 
-  console.log(fetchState, location.pathname);
+  console.log(fetchState, pathname);
   return (
     <>
-      {fetchState === "LOADING" && (
-        <h1 style={{ marginTop: "10rem" }}> Loading ... </h1>
-      )}
-      {fetchState === "SUCCESS" && location.pathname === "/" && <Home />}
-      {fetchState === "SUCCESS" && location.pathname === "/products" && (
+      {fetchState === "LOADING" && <LoadingShimmer />}
+      {fetchState === "SUCCESS" && pathname === "/" && <Home />}
+      {fetchState === "SUCCESS" && pathname === "/products" && (
         <ProductsList items={products} />
       )}
-      {fetchState === "SUCCESS" && location.pathname.includes("/product/") && (
+      {fetchState === "SUCCESS" && pathname.includes("/product/") && (
         // product &&
         <ProductPage />
         // <ProductPage item={product} />
         // <ProductDataLoader />
       )}
-      {fetchState === "SUCCESS" && location.pathname.includes("collection") && (
+      {fetchState === "SUCCESS" && pathname.includes("collection") && (
         <CollectionPage />
       )}
     </>
