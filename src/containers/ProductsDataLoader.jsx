@@ -50,8 +50,6 @@ const ProductsDataLoader = () => {
   }, [pathname, products]);
 
   useEffect(() => {
-    setFetchState("LOADING");
-
     if (pathname.includes("/product/") && products.length > 0) {
       const productId = pathname.split("/").pop();
       const foundItem = products.find((prod) => prod.id === productId);
