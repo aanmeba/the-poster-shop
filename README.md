@@ -19,3 +19,10 @@ The Poster Shop is a fully functional e-commerce website that specializes in sel
 - **React Router Dom** handles website routing and navigation, enabling smooth transitions between different pages.
 - **Firestore (Database)** serves as the database, managing the product data.
 - **APIs (Unsplash & Random Words)** allows for dynamic and diverse product data generation.
+
+## Future Goals
+
+- Adding an indicator to the cart when a user adds items to their cart.
+- Handling cart items in the database to ensure the data persists when a user comes back later.
+- Allowing the addition of variants of a single item to the cart. Currently, it overrides the existing selection.
+- Upgrading the quantity input field on the cart page.
