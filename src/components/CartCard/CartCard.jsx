@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Delete } from "../FontAwesomeIcons/FontAwesomeIcons";
 import styles from "./CartCard.module.scss";
 import { GlobalContext } from "../../context/GlobalContextProvider";
+import { capitalise } from "../../helpers/helpers";
 
 const CartCard = ({ item, calculateTotal }) => {
   const { onClick } = useContext(GlobalContext);
@@ -42,7 +43,9 @@ const CartCard = ({ item, calculateTotal }) => {
             <p>{artist}</p>
           </div>
           <div className={styles.row__left__info__bottom}>
-            <p>{sizes[size]}</p>
+            <p>
+              {capitalise(size)} - {sizes[size]}
+            </p>
             <p>${price}</p>
           </div>
         </div>

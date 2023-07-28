@@ -11,11 +11,17 @@ import CTAButton from "../../components/CTAButton/CTAButton";
 const CartPage = ({ items }) => {
   const initialOrder = {};
   items.forEach((item) => {
-    initialOrder[item.id] = {
-      orderQty: 1,
-      price: item.price,
-      subTotal: 1 * item.price,
-    };
+    if (initialOrder?.hasOwnProperty(item.id)) {
+      initialOrder[item.id].orderQty++;
+      initialOrder[item.id].subTotal =
+        initialOrder[item.id].orderQty * initialOrder[item.id].price;
+    } else {
+      initialOrder[item.id] = {
+        orderQty: 1,
+        price: item.price,
+        subTotal: 1 * item.price,
+      };
+    }
   });
   const [order, setOrder] = useState(initialOrder);
   const [total, setTotal] = useState(0);

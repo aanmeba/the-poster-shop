@@ -27,6 +27,7 @@ export const GlobalContextProvider = ({ children }) => {
   }, [globalState, key]);
 
   const addNewItem = (key, item) => {
+    console.log(key, item);
     setGlobalState({
       ...globalState,
       [key]: [...globalState[key], item],
@@ -34,8 +35,21 @@ export const GlobalContextProvider = ({ children }) => {
     setkey(key);
   };
 
+  const filterItems = (key, item, prop) => {
+    console.log(key, item.id, item.size, prop);
+    return globalState[key].filter((el) => {
+      if (!prop) return el.id !== item.id;
+      else return el.id !== item.id && el[prop] !== item[prop];
+    });
+  };
   const removeItem = (key, item) => {
-    const filteredItems = globalState[key].filter((el) => el.id !== item.id);
+    // const filteredItems = globalState[key].filter((el) => el.id !== item.id);
+    const filteredItems =
+      key === "favItems"
+        ? filterItems(key, item, "id")
+        : filterItems(key, item, "size");
+
+    console.log(key, item.id, item.size, " ---- ", filteredItems);
     setGlobalState({
       ...globalState,
       [key]: [...filteredItems],
@@ -50,11 +64,28 @@ export const GlobalContextProvider = ({ children }) => {
   const checkDuplication = (key, item) => {
     if (globalState[key].length === 0) return addNewItem(key, item);
 
-    const duplicatedItem = isDuplicated(key, item.id);
-    // toggle the favourite item
-    if (duplicatedItem && key === "favItems") return removeItem(key, item);
-    if (duplicatedItem) return;
-    if (!duplicatedItem) return addNewItem(key, item);
+    if (key === "favItems") {
+      // toggle the favourite item
+      const duplicatedItem = isDuplicated(key, item.id);
+      if (duplicatedItem) return removeItem(key, item);
+      else return addNewItem(key, item);
+    }
+
+    if (key === "cartItems")
+      return checkVariants(key, item) && addNewItem(key, item);
+  };
+
+  const checkVariants = (key, item) => {
+    console.log(key, item);
+    const duplicatedSize = globalState[key].find(
+      (el) => el.id === item.id && el.size === item.size
+    );
+    // variants handling!!!!!!! 🚨
+    console.log(duplicatedSize, "-- duplicatedSize");
+
+    // add up the orderQty
+    if (duplicatedSize) return false;
+    return true;
   };
 
   const onClick = (id, product, size) => {
