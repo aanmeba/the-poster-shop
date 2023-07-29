@@ -12,7 +12,7 @@ const CollectionWrapper = () => {
 
   return (
     <section className={styles.container}>
-      {products.length > 0 &&
+      {products?.length > 0 &&
         collectionCardData.map((c, i) => (
           <CollectionCard key={i} content={c} />
         ))}

@@ -1,24 +1,31 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Delete } from "../FontAwesomeIcons/FontAwesomeIcons";
 import styles from "./CartCard.module.scss";
-import { GlobalContext } from "../../context/GlobalContextProvider";
 import { capitalise } from "../../helpers/helpers";
 
-const CartCard = ({ item, calculateTotal }) => {
-  const { onClick } = useContext(GlobalContext);
-  const { sizes, size, id, price, image, artist, title } = item;
-  const [qty, setQty] = useState(1);
+const CartCard = ({ item, calculateTotal, handleDelete }) => {
+  const {
+    image,
+    artist,
+    title,
+    variantId,
+    variantOption,
+    variantSize,
+    priceInVariant,
+    quantity,
+  } = item;
+  const [qty, setQty] = useState(quantity);
 
-  const handleDelete = (e) => {
+  const deleteItem = (e) => {
     const { id: buttonId } = e.currentTarget;
-    onClick(buttonId, item);
+    handleDelete(buttonId, item, variantId);
   };
 
   const handleChange = (e) => {
     const { value } = e.target;
-    if (value > 1) {
+    if (value >= 1) {
       setQty(+value);
-      calculateTotal(id, +value);
+      calculateTotal(variantId, +value, priceInVariant);
     }
   };
 
@@ -29,7 +36,7 @@ const CartCard = ({ item, calculateTotal }) => {
           <button
             id="removeBtn"
             className={styles.row__left__wrapper__delete}
-            onClick={handleDelete}
+            onClick={deleteItem}
           >
             <Delete />
           </button>
@@ -44,9 +51,9 @@ const CartCard = ({ item, calculateTotal }) => {
           </div>
           <div className={styles.row__left__info__bottom}>
             <p>
-              {capitalise(size)} - {sizes[size]}
+              {capitalise(variantOption)} - {variantSize}
             </p>
-            <p>${price}</p>
+            <p>${priceInVariant}</p>
           </div>
         </div>
       </div>
@@ -55,7 +62,7 @@ const CartCard = ({ item, calculateTotal }) => {
           <input type="number" value={qty} onChange={handleChange} />
         </div>
         <div className={styles.row__right__sub_total}>
-          <p>${price * qty}</p>
+          <p>${priceInVariant * qty}</p>
         </div>
       </div>
     </article>

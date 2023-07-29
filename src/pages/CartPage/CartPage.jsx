@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import CartCard from "../../components/CartCard/CartCard";
 import CartTotal from "../../components/CartTotal/CartTotal";
 import PageContainer from "../../components/PageContainer/PageContainer";
@@ -7,30 +7,34 @@ import { updateDocument } from "../../services/firestore-services";
 import { clearLocalStorage } from "../../helpers/helpers";
 import { useNavigate } from "react-router-dom";
 import CTAButton from "../../components/CTAButton/CTAButton";
+import { GlobalContext } from "../../context/GlobalContextProvider";
 
 const CartPage = ({ items }) => {
   const initialOrder = {};
+  const { onClick } = useContext(GlobalContext);
+
   items.forEach((item) => {
-    if (initialOrder?.hasOwnProperty(item.id)) {
-      initialOrder[item.id].orderQty++;
-      initialOrder[item.id].subTotal =
-        initialOrder[item.id].orderQty * initialOrder[item.id].price;
+    const { quantity, variantId, priceInVariant } = item;
+    if (initialOrder?.hasOwnProperty(variantId)) {
+      initialOrder[variantId].orderQty++;
+      initialOrder[variantId].subTotal =
+        initialOrder[variantId].orderQty * initialOrder[variantId].price;
     } else {
-      initialOrder[item.id] = {
-        orderQty: 1,
-        price: item.price,
-        subTotal: 1 * item.price,
+      initialOrder[variantId] = {
+        orderQty: quantity,
+        price: priceInVariant,
+        subTotal: quantity * priceInVariant,
       };
     }
   });
   const [order, setOrder] = useState(initialOrder);
   const [total, setTotal] = useState(0);
 
-  const calculateTotal = (id, qty) => {
+  const calculateTotal = (id, qty, price) => {
     setOrder((prev) => {
       const found = prev[id];
       found.orderQty = qty;
-      found.subTotal = qty * found.price;
+      found.subTotal = qty * price;
       return { ...prev, [id]: found };
     });
   };
@@ -43,6 +47,15 @@ const CartPage = ({ items }) => {
     );
     setTotal(sumTotal);
   }, [order]);
+
+  const handleDelete = (buttonId, item, variantId) => {
+    const filteredOrder = Object.fromEntries(
+      Object.entries(order).filter(([k, v]) => k !== variantId)
+    );
+
+    setOrder(filteredOrder);
+    onClick(buttonId, item, variantId);
+  };
 
   const handlePayment = () => {
     // deduct the qty from quantity
@@ -63,7 +76,12 @@ const CartPage = ({ items }) => {
       </Title>
       {items?.length > 0 ? (
         items.map((item, i) => (
-          <CartCard key={i} item={item} calculateTotal={calculateTotal} />
+          <CartCard
+            key={i}
+            item={item}
+            calculateTotal={calculateTotal}
+            handleDelete={handleDelete}
+          />
         ))
       ) : (
         <CTAButton message={message} cta={cta} />

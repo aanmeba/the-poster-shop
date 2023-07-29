@@ -1,23 +1,37 @@
 import styles from "./ProductPage.module.scss";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContextProvider";
 import FavButton from "../../components/FavButton/FavButton";
 import Button from "../../components/Button/Button";
-import { checkAvailability } from "../../helpers/helpers";
+import {
+  checkAvailability,
+  calcPrice,
+  cartItemData,
+} from "../../helpers/helpers";
 
 const ProductPage = ({ product }) => {
   const { onClick } = useContext(GlobalContext);
+  const { variants, price } = product;
   const formRef = useRef();
+  const [size, setSize] = useState("small");
+
+  const handleChange = (e) => setSize(e.target.value);
 
   const handleClick = (e) => {
     e.preventDefault();
-    const form = formRef.current;
-    const data = new FormData(form);
-    const selectedSize = data.get("sizes");
+
+    // const variantId = variants.find((va) => va.option == size).id;
+
+    // const form = formRef.current;
+    // const data = new FormData(form);
+    // const selectedSize = data.get("variants");
 
     // handle addToCart, addToFav is handled in FavButton
-    const { id } = e.nativeEvent.submitter;
-    onClick(id, product, selectedSize);
+    const { id: key } = e.nativeEvent.submitter;
+    console.log("-- product page -- ", key, product.id, size);
+    const cartData = cartItemData(product, size);
+    onClick(key, cartData);
+    // onClick(key, product, variantId);
   };
 
   return (
@@ -36,7 +50,7 @@ const ProductPage = ({ product }) => {
           <FavButton item={product} styleList={styles.button__heart} />
         </div>
         <span className={styles.info__copyright}>by {product.artist}</span>
-        <p className={styles.info__price}>${product.price}</p>
+        <p className={styles.info__price}>${calcPrice(size, price)}</p>
         <p className={styles.info__desc}>{product.description}</p>
         <p className={styles.info__desc}>
           {checkAvailability(product.quantity)} available
@@ -52,14 +66,17 @@ const ProductPage = ({ product }) => {
             name="sizes"
             defaultValue="default"
             className={styles.info__form__sizes}
+            onChange={handleChange}
             required
           >
             <option value="select size" disabled hidden>
               select size
             </option>
-            <option value="small">small</option>
-            <option value="medium">medium</option>
-            <option value="large">large</option>
+            {variants?.map((variant) => (
+              <option value={variant.option} key={variant.id}>
+                {variant.option}
+              </option>
+            ))}
           </select>
           <div type="submit" className={styles.button}>
             <Button dark fill id="addToCart">
