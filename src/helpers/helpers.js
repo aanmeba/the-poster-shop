@@ -38,9 +38,7 @@ export const capitalise = (data) => {
 
 export const cartItemData = (item, size) => {
   const { id, image, title, artist, price, variants } = item;
-
   const findVariant = () => variants?.find((va) => va.option === size);
-  console.log(item, size, findVariant(), "---- findVariant");
   const {
     size: variantSize,
     id: variantId,

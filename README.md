@@ -22,9 +22,10 @@ The Poster Shop is a fully functional e-commerce website that specializes in sel
 
 ## Future Goals
 
+[v] Allowing the addition of variants of a single item to the cart. Currently, it overrides the existing selection.
+[ ] Removing duplication in cart page and adding up the quantities. Currently, it repeats the item with the same variant.
 [ ] Adding an indicator to the cart when a user adds items to their cart.
-[ ] Handling cart items in the database to ensure the data persists when a user comes back later.
-[ ] Allowing the addition of variants of a single item to the cart. Currently, it overrides the existing selection.
 [ ] Upgrading the quantity input field on the cart page.
+[ ] Handling cart items in the database to ensure the data persists when a user comes back later.
 
 ## Change Logs

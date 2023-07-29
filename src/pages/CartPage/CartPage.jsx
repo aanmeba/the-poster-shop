@@ -15,7 +15,7 @@ const CartPage = ({ items }) => {
 
   items.forEach((item) => {
     const { quantity, variantId, priceInVariant } = item;
-    if (initialOrder?.hasOwnProperty(variantId)) {
+    if (Object.prototype.hasOwnProperty.call(initialOrder, variantId)) {
       initialOrder[variantId].orderQty++;
       initialOrder[variantId].subTotal =
         initialOrder[variantId].orderQty * initialOrder[variantId].price;
@@ -50,6 +50,7 @@ const CartPage = ({ items }) => {
 
   const handleDelete = (buttonId, item, variantId) => {
     const filteredOrder = Object.fromEntries(
+      // eslint-disable-next-line no-unused-vars
       Object.entries(order).filter(([k, v]) => k !== variantId)
     );
 
