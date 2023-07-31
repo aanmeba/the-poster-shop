@@ -23,23 +23,34 @@ export const GlobalContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    console.log("** use effect **", key);
     key && saveItemsInLocalStorage(key);
-  }, [globalState, key]);
+  }, [key]);
 
   const addNewItem = (key, item) => {
-    setGlobalState({
-      ...globalState,
-      [key]: [...globalState[key], item],
-    });
+    console.log(key, item, globalState);
+    setGlobalState((prev) => ({
+      ...prev,
+      [key]: [...prev[key], item],
+    }));
     setkey(key);
   };
 
   const removeItem = (key, item) => {
-    const filteredItems = globalState[key].filter((el) => el.id !== item.id);
-    setGlobalState({
-      ...globalState,
+    let filteredItems;
+
+    if (key === "favItems") {
+      filteredItems = globalState[key].filter((el) => el.id !== item.id);
+    } else if (key === "cartItems") {
+      filteredItems = globalState[key].filter(
+        (el) => el.variantId !== item.variantId
+      );
+    }
+
+    setGlobalState((prev) => ({
+      ...prev,
       [key]: [...filteredItems],
-    });
+    }));
 
     setkey(key);
   };
@@ -50,20 +61,18 @@ export const GlobalContextProvider = ({ children }) => {
   const checkDuplication = (key, item) => {
     if (globalState[key].length === 0) return addNewItem(key, item);
 
-    const duplicatedItem = isDuplicated(key, item.id);
     // toggle the favourite item
-    if (duplicatedItem && key === "favItems") return removeItem(key, item);
-    if (duplicatedItem) return;
-    if (!duplicatedItem) return addNewItem(key, item);
+    const duplicatedItem = isDuplicated(key, item.id);
+    if (duplicatedItem) return removeItem(key, item);
+    else return addNewItem(key, item);
   };
 
-  const onClick = (id, product, size) => {
-    // update size if the product already exists
-    if (size) product.size = size;
+  const onClick = (key, product) => {
+    console.log("-- onClick -- ", key, "-", product.id, "-");
 
-    if (id === "addToFav") checkDuplication("favItems", product);
-    if (id === "addToCart") checkDuplication("cartItems", product);
-    if (id === "removeBtn") removeItem("cartItems", product);
+    if (key === "addToFav") checkDuplication("favItems", product);
+    if (key === "addToCart") addNewItem("cartItems", product);
+    if (key === "removeBtn") removeItem("cartItems", product);
   };
 
   return (
