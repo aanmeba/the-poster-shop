@@ -1,0 +1,26 @@
+@use "../../common/theme.scss" as theme;
+@use "../../common/mixins.scss";
+
+hr {
+  @include mixins.hr;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  &__inner {
+    text-transform: uppercase;
+
+    @include mixins.smaller-than-md {
+      width: 50%;
+    }
+  }
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  color: theme.$dark-gray;
+}

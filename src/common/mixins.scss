@@ -1,0 +1,113 @@
+@use "./theme.scss" as theme;
+
+// breakpoints
+$sm: 590px;
+$md: 800px;
+$md2: 830px;
+$lg: 1200px;
+$xl: 1350px;
+
+@mixin carousel-small {
+  @media screen and (max-width: $md2) {
+    @content;
+  }
+}
+
+@mixin smaller-screen {
+  @media screen and (max-width: $sm) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media screen and (min-width: ($md+1)) {
+    @content;
+  }
+}
+
+@mixin smaller-than-md {
+  @media screen and (max-width: $md) {
+    @content;
+  }
+}
+
+@mixin carousel-width {
+  @media screen and (max-width: $xl) {
+    width: 90%;
+  }
+}
+
+@mixin cta-button($bg-color: transparent, $color: theme.$black, $border: none) {
+  background-color: $bg-color;
+  color: $color;
+  border: $border;
+  cursor: pointer;
+  border-radius: 0.1rem;
+  font-family: theme.$sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+}
+
+@mixin bg-image {
+  background: theme.$white-darker;
+  background: linear-gradient(
+    300deg,
+    rgba(theme.$white-darker, 0.9) 0%,
+    rgba(theme.$white-07, 0.1) 80%
+  );
+}
+
+@mixin box-shadow {
+  box-shadow: 2px 1px 5px 1px theme.$white-07;
+}
+@mixin box-shadow-dark {
+  box-shadow: 2px 1px 10px 1px theme.$shadow-dark;
+}
+
+@mixin bg-color($color: theme.$shadow) {
+  background-color: $color;
+}
+
+@mixin hover($percent: 70%) {
+  filter: brightness($percent);
+}
+
+@mixin margin-for-container {
+  margin: 5rem auto;
+}
+
+@mixin flex-center-center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin card-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: theme.$black;
+}
+
+@mixin card-title($font) {
+  margin: 0;
+  font-family: $font;
+  white-space: normal;
+  font-size: 1rem;
+}
+
+@mixin btn-circle {
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 50%;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+@mixin hr {
+  width: 100%;
+  border-top: 1px solid theme.$shadow;
+}

@@ -1,0 +1,6 @@
+@use "../../common/mixins.scss";
+
+.container {
+  @include mixins.margin-for-container;
+  @include mixins.flex-center-center(column);
+}

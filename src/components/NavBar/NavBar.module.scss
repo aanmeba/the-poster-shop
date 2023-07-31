@@ -1,0 +1,24 @@
+@use "../../common/theme.scss" as theme;
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 1rem;
+  &__text {
+    &__light {
+      color: theme.$white;
+      &:visited {
+        color: theme.$white;
+      }
+    }
+
+    &__dark {
+      color: theme.$black;
+      &:visited {
+        color: theme.$black;
+      }
+    }
+  }
+}

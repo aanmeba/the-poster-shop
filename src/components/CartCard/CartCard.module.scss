@@ -1,0 +1,114 @@
+@use "../../common/mixins.scss";
+@use "../../common/theme.scss" as theme;
+
+.row {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  margin: 1rem;
+
+  &__left {
+    display: flex;
+    gap: 1rem;
+
+    &__wrapper {
+      @include mixins.flex-center-center();
+
+      &__delete {
+        @include mixins.btn-circle;
+        background-color: transparent;
+
+        &:hover {
+          background-color: theme.$white;
+        }
+      }
+    }
+
+    &__prod {
+      margin: 0;
+      width: 8rem;
+      height: auto;
+
+      padding: 0.5rem;
+      box-sizing: border-box;
+
+      @include mixins.flex-center-center();
+      @include mixins.bg-image;
+
+      img {
+        width: 90%;
+        height: auto;
+        object-fit: cover;
+      }
+      @include mixins.smaller-screen {
+        width: 4rem;
+      }
+    }
+
+    p {
+      margin: 0;
+    }
+
+    &__info {
+      @include mixins.card-info;
+
+      &__top {
+        &__title {
+          @include mixins.card-title(theme.$sans-serif);
+        }
+      }
+
+      &__top,
+      &__bottom {
+        font-size: 0.9rem;
+        color: theme.$dark-gray;
+      }
+    }
+  }
+  &__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    padding: 1rem;
+    gap: 1rem;
+
+    &__quantity {
+      width: 7rem;
+
+      input {
+        width: 2rem;
+        height: 1rem;
+        color: theme.$black;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    &__sub_total {
+      width: 7rem;
+      p {
+        color: theme.$black;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+    }
+  }
+  @include mixins.smaller-screen {
+    &__left {
+      gap: 0rem;
+    }
+    &__right {
+      gap: 1.5rem;
+
+      &__sub_total,
+      &__quantity {
+        width: 1.5rem;
+        input {
+          width: 1rem;
+        }
+      }
+    }
+  }
+}
