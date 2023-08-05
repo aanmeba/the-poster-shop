@@ -1,6 +1,6 @@
 # E-Commerce Project - The Poster Shop
 
-The Poster Shop is a fully functional e-commerce website that specializes in selling posters. It offers a wide range of beautifully designed posters that cater to various interests and styles. The website provides a seamless shopping experience, allowing users to browse, search, and add items to their cart or favorites list. With its intuitive user interface and efficient data management, The Poster Shop ensures a smooth and delightful shopping journey for its customers.
+The Poster Shop is an e-commerce website that specializes in selling posters. The website provides a shopping experience, allowing users to browse, and add items to their cart or favourites list.
 
 ### 👉 Visit the live website: [The Poster Shop](https://thepostershop.netlify.app/)
 
@@ -29,3 +29,8 @@ The Poster Shop is a fully functional e-commerce website that specializes in sel
 [ ] Handling cart items in the database to ensure the data persists when a user comes back later.
 
 ## Change Logs
+
+### 01/08/2023 - Variants handling in the Cart page
+
+- Showed variants in the Cart page
+- Added for variants manipulation related calculations
