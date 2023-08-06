@@ -8,6 +8,7 @@ import {
 import styles from "./NavBar.module.scss";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContextProvider";
+import Badge from "../Badge/Badge";
 
 const NavBar = ({ dark }) => {
   const { globalState } = useContext(GlobalContext);
@@ -29,13 +30,18 @@ const NavBar = ({ dark }) => {
     color: dark ? "rgb(51, 51, 51)" : "rgb(248, 247, 246)",
   });
 
+  const badgeColourTheme = dark ? "dark" : "light";
+
   return (
     <nav className={styles.nav}>
       <NavLink to="/favourites" style={linkColour()}>
         {hasItems.favourites ? <HeartSolid /> : <HeartEmpty />}
       </NavLink>
       <NavLink to="/cart" style={linkColour()}>
-        {hasItems.cart ? <ShoppingBag /> : <EmptyFolder />}
+        <ShoppingBag />
+        {hasItems.cart && (
+          <Badge count={cartItems.length} theme={badgeColourTheme} />
+        )}
       </NavLink>
     </nav>
   );
