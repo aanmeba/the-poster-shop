@@ -28,12 +28,20 @@ export const GlobalContextProvider = ({ children }) => {
   }, [key]);
 
   const addNewItem = (key, item) => {
-    console.log(key, item, globalState);
-    setGlobalState((prev) => ({
-      ...prev,
-      [key]: [...prev[key], item],
-    }));
+    const existingItem = globalState[key].find(
+      (el) => el.variantId === item.variantId
+    );
+    if (existingItem) {
+      existingItem.quantity++;
+    } else {
+      setGlobalState((prev) => ({
+        ...prev,
+        [key]: [...prev[key], item],
+      }));
+    }
     setkey(key);
+
+    console.log(key, item, globalState);
   };
 
   const removeItem = (key, item) => {
