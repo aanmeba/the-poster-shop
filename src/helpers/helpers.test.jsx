@@ -6,7 +6,7 @@ import {
   // cleanData,
   getNumberWithinRange,
   getRandomNum,
-  generateVariantInfo,
+  // generateVariantInfo,
   // cartItemData,
 } from "./helpers";
 

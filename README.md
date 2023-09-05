@@ -27,8 +27,13 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 - [v] Adding a badge on the Cart icon when a user adds items to it.
 - [ ] Upgrading the quantity input field on the Cart page.
 - [ ] Handling cart items in the database to ensure the data persists when a user comes back later.
+- [v] Fixing the issue of `FavButton` showing on the navigation bar when scrolling.
 
 ## Change Logs
+
+### 05/09/2023 - Fix the `FavButton` showing on the nav while scrolling
+
+- Removed unnecessary `z-index` in the `Card` component
 
 ### 12/08/2023 - Separate services and add tests for helpers
 
