@@ -1,6 +1,6 @@
 # E-Commerce Project - The Poster Shop
 
-The Poster Shop is a fully functional e-commerce website that specializes in selling posters. It offers a wide range of beautifully designed posters that cater to various interests and styles. The website provides a seamless shopping experience, allowing users to browse, search, and add items to their cart or favorites list. With its intuitive user interface and efficient data management, The Poster Shop ensures a smooth and delightful shopping journey for its customers.
+The Poster Shop is an e-commerce website that specializes in selling posters. The website provides a shopping experience, allowing users to browse, and add items to their cart or favourites list.
 
 ### 👉 Visit the live website: [The Poster Shop](https://thepostershop.netlify.app/)
 
@@ -22,10 +22,31 @@ The Poster Shop is a fully functional e-commerce website that specializes in sel
 
 ## Future Goals
 
-[v] Allowing the addition of variants of a single item to the cart. Currently, it overrides the existing selection.
-[ ] Removing duplication in cart page and adding up the quantities. Currently, it repeats the item with the same variant.
-[ ] Adding an indicator to the cart when a user adds items to their cart.
-[ ] Upgrading the quantity input field on the cart page.
-[ ] Handling cart items in the database to ensure the data persists when a user comes back later.
+- [v] Allowing multiple variants for a single item in the Cart. Currently, it overrides the existing selection.
+- [v] Removing duplicated items in Cart page and adding up the quantities. Currently, it repeats the item with the same variant.
+- [v] Adding a badge on the Cart icon when a user adds items to it.
+- [ ] Upgrading the quantity input field on the Cart page.
+- [ ] Handling cart items in the database to ensure the data persists when a user comes back later.
+- [v] Fixing the issue of `FavButton` showing on the navigation bar when scrolling.
 
 ## Change Logs
+
+### 05/09/2023 - Fix the `FavButton` showing on the nav while scrolling
+
+- Removed unnecessary `z-index` in the `Card` component
+
+### 12/08/2023 - Separate services and add tests for helpers
+
+- Broke down services into smaller pieces
+- Added tests for helper functions (work in progress)
+
+### 01/08/2023 - Improve Handling of Variants in the Cart Page
+
+- Showed variants in the Cart page
+- Implemented calculations and features necessary for handling variant manipulation
+- Improved handling duplicated items in the Cart page
+
+### 06/08/2023 - Add badge for cart items
+
+- Integrated a badge onto the cart icon, indicating the presence of items within
+- Added a dark or light theme for the badge depending on the backgound colour in the navigation bar

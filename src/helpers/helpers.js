@@ -1,12 +1,14 @@
+import { getRandomWords } from "../services/randomWords-services";
+
 export const getRandomNum = (limit) => Math.floor(Math.random() * limit) + 1;
 
-export const getRandomWords = async (num) => {
-  const baseUrl = `https://random-word-api.herokuapp.com/word`;
-  const length = getRandomNum(num);
-  const response = await fetch(`${baseUrl}?number=${length}`);
-  const data = await response.json();
-  return data;
-};
+// export const getRandomWords = async (num) => {
+//   const baseUrl = `https://random-word-api.herokuapp.com/word`;
+//   const length = getRandomNum(num);
+//   const response = await fetch(`${baseUrl}?number=${length}`);
+//   const data = await response.json();
+//   return data;
+// };
 
 export const getNumberWithinRange = (minimum, range, unit = 10) => {
   let rand = 0;
@@ -36,62 +38,79 @@ export const capitalise = (data) => {
     .join(" ");
 };
 
+export const findVariant = (variants, size) =>
+  variants?.find((va) => va.option === size);
+
+export const generateVariantInfo = (variants, size) => {
+  const result = findVariant(variants, size);
+  const { size: variantSize, id: variantId, option: variantOption } = result;
+  return { variantId, variantOption, variantSize };
+};
+
 export const cartItemData = (item, size) => {
   const { id, image, title, artist, price, variants } = item;
-  const findVariant = () => variants?.find((va) => va.option === size);
-  const {
-    size: variantSize,
-    id: variantId,
-    option: variantOption,
-  } = findVariant();
-  const updatedPrice = () => calcPrice(size, price);
+
+  const variantsInfo = generateVariantInfo(variants, size);
+  const updatedPrice = calcPrice(size, price);
 
   return {
     id: id,
     image,
     title,
     artist,
-    variantId,
-    variantOption,
-    variantSize,
-    priceInVariant: updatedPrice(),
+    ...variantsInfo,
+    priceInVariant: updatedPrice,
     quantity: 1,
   };
 };
 
-// export const duplicateCartItems = (items, item) => {
-//   return items.findAll((el) => el.variantId === item.variantId);
-// };
+export const getUserName = (user) =>
+  user ? user.name ?? user.username : "unknown";
+
+export const getOrientation = (width, height) =>
+  height > width ? "portrait" : "landscape";
+
+export const getDescription = async (alt_description) => {
+  const additionalDesc = await getRandomWords(50);
+  return capitalise(alt_description) + ". " + capitalise(additionalDesc);
+};
+
+export const getTitle = async () => {
+  const wordsList = await getRandomWords(2);
+  return capitalise(wordsList);
+};
+
+export const generateVariants = (id) => {
+  return [
+    { id: id + "+" + "small", option: "small", size: "30x40" },
+    { id: id + "+" + "medium", option: "medium", size: "50x70" },
+    { id: id + "+" + "large", option: "large", size: "100x140" },
+  ];
+};
+
+export const getImageUrl = (urls) =>
+  urls ? urls.regular ?? urls.small ?? urls.thumb ?? urls.full ?? urls.raw : "";
 
 export const cleanData = async (data, collection) => {
   const { alt_description, color, id, urls, user, height, width } = data;
-  const image = urls
-    ? urls.regular ?? urls.small ?? urls.thumb ?? urls.full ?? urls.raw
-    : "";
 
-  const name = user ? user.name ?? user.username : "unknown";
-  const orientation = height > width ? "portrait" : "landscape";
-  const wordsList = await getRandomWords(2);
-  const title = capitalise(wordsList);
-  const additionalDesc = await getRandomWords(50);
-  const description =
-    capitalise(alt_description) + ". " + capitalise(additionalDesc);
+  const image = getImageUrl(urls);
+  const artist = getUserName(user);
+  const orientation = getOrientation(width, height);
+  const title = await getTitle();
+  const description = await getDescription(alt_description);
 
   return {
-    title: title || null,
-    id: id || null,
-    artist: name || null,
-    image: image || null,
+    title,
+    id,
+    artist,
+    image,
     description,
     color,
-    orientation: orientation,
-    price: getNumberWithinRange(30, 7) || null,
+    orientation,
+    price: getNumberWithinRange(30, 7),
     quantity: getNumberWithinRange(20, 9),
-    variants: [
-      { id: id + "+" + "small", option: "small", size: "30x40" },
-      { id: id + "+" + "medium", option: "medium", size: "50x70" },
-      { id: id + "+" + "large", option: "large", size: "100x140" },
-    ],
+    variants: generateVariants(id),
     collection,
     cart: [],
   };

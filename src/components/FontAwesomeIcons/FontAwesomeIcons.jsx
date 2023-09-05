@@ -6,7 +6,6 @@ import {
   faHeart as faHeartSolid,
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  faFolder,
   faHeart as faHeartEmpty,
   faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
@@ -31,10 +30,6 @@ export const ShoppingCart = () => {
 
 export const ShoppingBag = () => {
   return <FontAwesomeIcon icon={faBagShopping} />;
-};
-
-export const EmptyFolder = () => {
-  return <FontAwesomeIcon icon={faFolder} />;
 };
 
 export const ArrowRight = () => {

@@ -38,6 +38,7 @@ const CartPage = ({ items }) => {
       return { ...prev, [id]: found };
     });
   };
+
   const navigate = useNavigate();
 
   useEffect(() => {
