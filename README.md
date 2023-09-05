@@ -22,12 +22,12 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 
 ## Future Goals
 
-- [v] Allowing multiple variants for a single item in the Cart. Currently, it overrides the existing selection.
-- [v] Removing duplicated items in Cart page and adding up the quantities. Currently, it repeats the item with the same variant.
-- [v] Adding a badge on the Cart icon when a user adds items to it.
+- [x] Allowing multiple variants for a single item in the Cart. Currently, it overrides the existing selection.
+- [x] Removing duplicated items in Cart page and adding up the quantities. Currently, it repeats the item with the same variant.
+- [x] Adding a badge on the Cart icon when a user adds items to it.
 - [ ] Upgrading the quantity input field on the Cart page.
 - [ ] Handling cart items in the database to ensure the data persists when a user comes back later.
-- [v] Fixing the issue of `FavButton` showing on the navigation bar when scrolling.
+- [x] Fixing the issue of `FavButton` showing on the navigation bar when scrolling.
 
 ## Change Logs
 
