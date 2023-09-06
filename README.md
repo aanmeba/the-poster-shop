@@ -20,6 +20,15 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 - **Firestore (Database)** serves as the database, managing the product data.
 - **APIs (Unsplash & Random Words)** allows for dynamic and diverse product data generation.
 
+## Known Issues
+
+- [ ] The length of of data for carasoul keeps changing when making it responsive
+- [ ] Favourite page doesn't show the correct items - something related to localStorage
+- [ ] Badge on the cart doesn't apply for the count of single item
+- [ ] Hovering effect on the collections on the Home page occasionally flicker
+- [ ] After payment, the stock doesn't change in the Product page
+- [ ] After payment, the cart items are restored in the Cart page
+
 ## Future Goals
 
 - [x] Allowing multiple variants for a single item in the Cart. Currently, it overrides the existing selection.
@@ -28,6 +37,7 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 - [ ] Upgrading the quantity input field on the Cart page.
 - [ ] Handling cart items in the database to ensure the data persists when a user comes back later.
 - [x] Fixing the issue of `FavButton` showing on the navigation bar when scrolling.
+- [ ] Adding DOM and user events related testing cases
 
 ## Change Logs
 
