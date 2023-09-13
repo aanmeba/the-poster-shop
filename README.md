@@ -24,7 +24,8 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 
 - [ ] The length of of data for carasoul keeps changing when making it responsive
 - [x] Favourite page doesn't show the correct items - something related to localStorage
-- [ ] Badge on the cart doesn't apply for the count of single item
+- [x] Badge on the cart doesn't apply for the count of single item
+- [ ] Updating the number of items in the Cart page doesn't apply to the real quanity
 - [ ] Hovering effect on the collections on the Home page occasionally flicker
 - [ ] After payment, the stock doesn't change in the Product page
 - [ ] After payment, the cart items are restored in the Cart page
@@ -61,6 +62,7 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 
 - Removed unnecessary `z-index` in the `Card` component
 
-### 13/09/2023 - Fix a bug in the Favourite Page
+### 13/09/2023 - Fix bugs in the Favourite Page & the Cart Badge
 
 - Fix control flow to make adding favourite items to the Favourite Page
+- Added a function to calculate the total number of items in the Cart Page, not the number of item's type
