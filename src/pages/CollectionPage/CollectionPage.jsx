@@ -6,13 +6,10 @@ import { CollectionContext } from "../../context/CollectionContextProvider";
 import PageContainer from "../../components/PageContainer/PageContainer";
 
 const CollectionPage = () => {
-  console.log("********* CollectionPage *********");
   const { id } = useParams();
-
+  const { collection } = useContext(CollectionContext);
   const collectionName = id.includes("-") ? id.replace("-", " ") : id;
 
-  const { collection } = useContext(CollectionContext);
-  console.log("Collection page - ", id, collectionName);
   return (
     <PageContainer>
       <Title dark capitalize>

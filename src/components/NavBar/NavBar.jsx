@@ -31,6 +31,11 @@ const NavBar = ({ dark }) => {
 
   const badgeColourTheme = dark ? "dark" : "light";
 
+  const totalItemsInCart = cartItems.reduce(
+    (acc, curr) => acc + curr.quantity,
+    0
+  );
+
   return (
     <nav className={styles.nav}>
       <NavLink to="/favourites" style={linkColour()}>
@@ -39,7 +44,7 @@ const NavBar = ({ dark }) => {
       <NavLink to="/cart" style={linkColour()}>
         <ShoppingBag />
         {hasItems.cart && (
-          <Badge count={cartItems.length} theme={badgeColourTheme} />
+          <Badge count={totalItemsInCart} theme={badgeColourTheme} />
         )}
       </NavLink>
     </nav>

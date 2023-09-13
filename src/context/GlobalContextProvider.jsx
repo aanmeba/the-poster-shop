@@ -31,7 +31,8 @@ export const GlobalContextProvider = ({ children }) => {
     const existingItem = globalState[key].find(
       (el) => el.variantId === item.variantId
     );
-    if (existingItem) {
+
+    if (key === "cartItems" && existingItem) {
       existingItem.quantity++;
     } else {
       setGlobalState((prev) => ({

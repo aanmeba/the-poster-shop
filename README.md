@@ -20,6 +20,16 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 - **Firestore (Database)** serves as the database, managing the product data.
 - **APIs (Unsplash & Random Words)** allows for dynamic and diverse product data generation.
 
+## Known Issues
+
+- [ ] The length of of data for carasoul keeps changing when making it responsive
+- [x] Favourite page doesn't show the correct items - something related to localStorage
+- [x] Badge on the cart doesn't apply for the count of single item
+- [ ] Updating the number of items in the Cart page doesn't apply to the real quanity
+- [ ] Hovering effect on the collections on the Home page occasionally flicker
+- [ ] After payment, the stock doesn't change in the Product page
+- [ ] After payment, the cart items are restored in the Cart page
+
 ## Future Goals
 
 - [x] Allowing multiple variants for a single item in the Cart. Currently, it overrides the existing selection.
@@ -28,17 +38,9 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 - [ ] Upgrading the quantity input field on the Cart page.
 - [ ] Handling cart items in the database to ensure the data persists when a user comes back later.
 - [x] Fixing the issue of `FavButton` showing on the navigation bar when scrolling.
+- [ ] Adding DOM and user events related testing cases
 
 ## Change Logs
-
-### 05/09/2023 - Fix the `FavButton` showing on the nav while scrolling
-
-- Removed unnecessary `z-index` in the `Card` component
-
-### 12/08/2023 - Separate services and add tests for helpers
-
-- Broke down services into smaller pieces
-- Added tests for helper functions (work in progress)
 
 ### 01/08/2023 - Improve Handling of Variants in the Cart Page
 
@@ -50,3 +52,17 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 
 - Integrated a badge onto the cart icon, indicating the presence of items within
 - Added a dark or light theme for the badge depending on the backgound colour in the navigation bar
+
+### 12/08/2023 - Separate services and add tests for helpers
+
+- Broke down services into smaller pieces
+- Added tests for helper functions (work in progress)
+
+### 05/09/2023 - Fix the `FavButton` showing on the nav while scrolling
+
+- Removed unnecessary `z-index` in the `Card` component
+
+### 13/09/2023 - Fix bugs in the Favourite Page & the Cart Badge
+
+- Fix control flow to make adding favourite items to the Favourite Page
+- Added a function to calculate the total number of items in the Cart Page, not the number of item's type
