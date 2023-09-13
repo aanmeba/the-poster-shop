@@ -23,7 +23,7 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 ## Known Issues
 
 - [ ] The length of of data for carasoul keeps changing when making it responsive
-- [ ] Favourite page doesn't show the correct items - something related to localStorage
+- [x] Favourite page doesn't show the correct items - something related to localStorage
 - [ ] Badge on the cart doesn't apply for the count of single item
 - [ ] Hovering effect on the collections on the Home page occasionally flicker
 - [ ] After payment, the stock doesn't change in the Product page
@@ -41,15 +41,6 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 
 ## Change Logs
 
-### 05/09/2023 - Fix the `FavButton` showing on the nav while scrolling
-
-- Removed unnecessary `z-index` in the `Card` component
-
-### 12/08/2023 - Separate services and add tests for helpers
-
-- Broke down services into smaller pieces
-- Added tests for helper functions (work in progress)
-
 ### 01/08/2023 - Improve Handling of Variants in the Cart Page
 
 - Showed variants in the Cart page
@@ -60,3 +51,16 @@ The Poster Shop is an e-commerce website that specializes in selling posters. Th
 
 - Integrated a badge onto the cart icon, indicating the presence of items within
 - Added a dark or light theme for the badge depending on the backgound colour in the navigation bar
+
+### 12/08/2023 - Separate services and add tests for helpers
+
+- Broke down services into smaller pieces
+- Added tests for helper functions (work in progress)
+
+### 05/09/2023 - Fix the `FavButton` showing on the nav while scrolling
+
+- Removed unnecessary `z-index` in the `Card` component
+
+### 13/09/2023 - Fix a bug in the Favourite Page
+
+- Fix control flow to make adding favourite items to the Favourite Page
